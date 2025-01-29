@@ -3,7 +3,33 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain unique_key,
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
+  description 'Table containing clinical measurements and observations for persons in the OMOP CDM',
+  column_descriptions (
+    measurement_id = 'Unique identifier for each measurement',
+    person_id = 'Unique identifier for each person',
+    measurement_concept_id = 'Concept ID representing the type of measurement',
+    measurement_date = 'Date of the measurement',
+    measurement_datetime = 'Date and time of the measurement',
+    measurement_time = 'Time of the measurement',
+    measurement_type_concept_id = 'Concept ID representing the type of measurement',
+    operator_concept_id = 'Concept ID representing the operator used in the measurement',
+    value_as_number = 'Numeric value of the measurement',
+    value_as_concept_id = 'Concept ID representing the value of the measurement',
+    unit_concept_id = 'Concept ID representing the unit of the measurement',
+    range_low = 'Lower range of the measurement',
+    range_high = 'Upper range of the measurement',
+    provider_id = 'Unique identifier for the provider',
+    visit_occurrence_id = 'Unique identifier for the visit occurrence',
+    visit_detail_id = 'Unique identifier for the visit detail',
+    measurement_source_value = 'Source value for the measurement',
+    measurement_source_concept_id = 'Concept ID representing the source of the measurement',
+    unit_source_value = 'Source value for the unit of the measurement',
+    unit_source_concept_id = 'Concept ID representing the source of the unit',
+    value_source_value = 'Source value for the measurement value',
+    meas_event_field_concept_id = 'Concept ID representing the field in the measurement event',
+    measurement_event_id = 'Unique identifier for the measurement event'
+  )
 );
 
 SELECT

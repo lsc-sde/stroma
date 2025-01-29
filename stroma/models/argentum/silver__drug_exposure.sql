@@ -3,7 +3,8 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain drug_exposure_id,
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
+  description 'Records details of drugs a patient has been exposed to, including prescriptions and administrations.'
 );
 
 SELECT
