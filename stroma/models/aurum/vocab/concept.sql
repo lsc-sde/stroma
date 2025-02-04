@@ -1,7 +1,8 @@
 MODEL (
   name gold.concept,
   kind VIEW,
-  cron '@yearly'
+  cron '@yearly',
+  grain concept_id
 );
 
 SELECT

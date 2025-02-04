@@ -1,7 +1,8 @@
 MODEL (
   name gold.relationship,
   kind VIEW,
-  cron '@yearly'
+  cron '@yearly',
+  grain relationship_id
 );
 
 SELECT

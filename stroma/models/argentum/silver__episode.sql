@@ -2,6 +2,7 @@ MODEL (
   name silver.episode,
   kind FULL,
   cron '@monthly',
+  grain episode_id,
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing information about episodes of care in the OMOP CDM',
   column_descriptions 

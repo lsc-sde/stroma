@@ -1,7 +1,8 @@
 MODEL (
   name gold.domain,
   kind VIEW,
-  cron '@yearly'
+  cron '@yearly',
+  grain domain_id
 );
 
 SELECT
