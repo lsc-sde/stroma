@@ -1,2 +1,2 @@
 git config --global --add safe.directory /workspaces/stroma
-pip install --upgrade -e .[dev]
+uv sync --allow-insecure-host github.com

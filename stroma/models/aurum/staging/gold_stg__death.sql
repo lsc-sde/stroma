@@ -15,6 +15,3 @@ SELECT
 FROM silver.death AS d
 INNER JOIN stg_gold.stg__person AS p
   ON d.person_id = p.person_id
-WHERE
-  d.death_date::DATE >= p.birth_datetime::DATE
-  AND d.death_date::DATE <= CURRENT_DATE

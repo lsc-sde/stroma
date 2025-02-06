@@ -31,8 +31,8 @@ MODEL (
 SELECT
   p.person_id,
   p.gender_concept_id,
-  p.year_of_birth::INT, /* This is the year the patient was born */
-  p.month_of_birth::INT,
+  YEAR(p.birth_datetime)::INT as year_of_birth, /* This is the year the patient was born */
+  MONTH(p.birth_datetime)::INT as month_of_birth,
   p.day_of_birth::INT,
   p.birth_datetime::TIMESTAMP,
   p.race_concept_id,
