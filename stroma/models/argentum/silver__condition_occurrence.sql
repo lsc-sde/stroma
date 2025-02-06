@@ -31,22 +31,22 @@ MODEL (
 );
 
 SELECT
-  co.condition_occurrence_id,
-  co.person_id,
-  co.condition_concept_id,
-  co.condition_start_date,
-  co.condition_start_datetime,
-  co.condition_end_date,
-  co.condition_end_datetime,
-  co.condition_type_concept_id,
-  co.condition_status_concept_id,
-  co.stop_reason,
-  co.provider_id,
-  co.visit_occurrence_id,
-  co.visit_detail_id,
-  co.condition_source_value,
-  co.condition_source_concept_id,
-  co.condition_status_source_value
+  co.condition_occurrence_id::INT,
+  co.person_id::INT,
+  co.condition_concept_id::INT,
+  co.condition_start_date::DATE,
+  co.condition_start_datetime::TIMESTAMP,
+  co.condition_end_date::DATE,
+  co.condition_end_datetime::TIMESTAMP,
+  co.condition_type_concept_id::INT,
+  co.condition_status_concept_id::INT,
+  co.stop_reason::TEXT,
+  co.provider_id::INT,
+  co.visit_occurrence_id::INT,
+  co.visit_detail_id::INT,
+  co.condition_source_value::TEXT,
+  co.condition_source_concept_id::INT,
+  co.condition_status_source_value::TEXT
 FROM bronze.condition_occurrence AS co
 WHERE
   co.condition_start_date >= '2015-01-01'
