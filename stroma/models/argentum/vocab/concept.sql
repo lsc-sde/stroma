@@ -5,14 +5,14 @@ MODEL (
 );
 
 SELECT
-  c.concept_id,
-  c.concept_name,
-  c.domain_id,
-  c.vocabulary_id,
-  c.concept_class_id,
-  c.standard_concept,
-  c.concept_code,
-  c.valid_start_date,
-  c.valid_end_date,
-  c.invalid_reason
+  c.concept_id::INT,
+  c.concept_name::TEXT,
+  c.domain_id::TEXT,
+  c.vocabulary_id::TEXT,
+  c.concept_class_id::TEXT,
+  c.standard_concept::TEXT,
+  c.concept_code::TEXT,
+  c.valid_start_date::DATE,
+  c.valid_end_date::DATE,
+  c.invalid_reason::TEXT
 FROM bronze.concept AS c

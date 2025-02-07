@@ -5,7 +5,7 @@ MODEL (
 );
 
 SELECT
-  d.domain_id,
-  d.domain_name,
-  d.domain_concept_id
+  d.domain_id::TEXT,
+  d.domain_name::TEXT,
+  d.domain_concept_id::INT
 FROM silver.domain AS d

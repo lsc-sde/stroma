@@ -5,7 +5,7 @@ MODEL (
 );
 
 SELECT
-  cs.concept_id,
-  cs.concept_synonym_name,
-  cs.language_concept_id
+  cs.concept_id::INT,
+  cs.concept_synonym_name::TEXT,
+  cs.language_concept_id::INT
 FROM silver.concept_synonym AS cs
