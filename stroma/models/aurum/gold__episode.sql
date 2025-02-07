@@ -2,7 +2,24 @@ MODEL (
   name gold.episode,
   kind FULL,
   cron '@monthly',
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
+  description 'Table containing information about episodes of care in the OMOP CDM',
+  column_descriptions 
+  (
+    episode_id = 'Unique identifier for each episode',
+    person_id = 'Unique identifier for each person',
+    episode_concept_id = 'Concept ID representing the type of episode',
+    episode_start_date = 'Start date of the episode',
+    episode_start_datetime = 'Start date and time of the episode',
+    episode_end_date = 'End date of the episode',
+    episode_end_datetime = 'End date and time of the episode',
+    episode_parent_id = 'Identifier for the parent episode, if applicable',
+    episode_number = 'Sequential number of the episode',
+    episode_object_concept_id = 'Concept ID representing the object of the episode',
+    episode_type_concept_id = 'Concept ID representing the type of episode',
+    episode_source_value = 'Source value for the episode',
+    episode_source_concept_id = 'Concept ID representing the source of the episode'
+  )
 );
 
 SELECT
