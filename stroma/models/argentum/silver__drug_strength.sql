@@ -17,7 +17,8 @@ MODEL (
     valid_start_date = 'Start date of the validity period',
     valid_end_date = 'End date of the validity period',
     invalid_reason = 'Reason for invalidation'
-  ));
+  )
+        );
 
 SELECT
   ds.drug_concept_id::INT,

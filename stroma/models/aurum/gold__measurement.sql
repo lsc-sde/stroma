@@ -2,11 +2,7 @@ MODEL (
   name gold.measurement,
   kind FULL,
   cron '@monthly',
-<<<<<<< HEAD
   grain measurement_id,
-=======
-  grain unique_key,
->>>>>>> origin/main
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing clinical measurements and observations for persons in the OMOP CDM',
   column_descriptions (
