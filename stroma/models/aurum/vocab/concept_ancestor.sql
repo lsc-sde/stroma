@@ -5,8 +5,8 @@ MODEL (
 );
 
 SELECT
-  ca.ancestor_concept_id,
-  ca.descendant_concept_id,
-  ca.min_levels_of_separation,
-  ca.max_levels_of_separation
+  ca.ancestor_concept_id::INT,
+  ca.descendant_concept_id::INT,
+  ca.min_levels_of_separation::INT,
+  ca.max_levels_of_separation::INT
 FROM silver.concept_ancestor AS ca

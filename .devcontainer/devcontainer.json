@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-	"name": "Python 3",
+	"name": "SQLMesh Python 3.12",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"build": {
 		"context": "..",
@@ -12,12 +12,15 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
+	"containerUser": "vscode",
+	"updateRemoteUserUID": true,
+	"containerEnv": {
+		"HOME": "/home/vscode",
+		"VIRTUAL_ENV": "/workspaces/stroma/.cvenv"
+	},
 	"postCreateCommand": "bash ./.devcontainer/scripts/postCreate.sh",
 	"postStartCommand": "bash ./.devcontainer/scripts/postStart.sh",
-	"mounts": [
-		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.sqlmesh,target=/home/vscode/.sqlmesh,type=bind,consistency=cached",
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/dev/ssl-certificates,target=/home/vscode/ssl-certificates,type=bind,consistency=cached"
-	],
+	"mounts": [],
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -27,17 +30,14 @@
 				"github.copilot",
 				"mads-hartmann.bash-ide-vscode",
 				"mechatroner.rainbow-csv",
-				"ms-python.black-formatter",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"njpwerner.autodocstring",
 				"tamasfe.even-better-toml",
 			],
 			"settings": {
-				"python.formatting.provider": "black",
-				"python.analysis.completeFunctionParens": true,
 				"[python]": {
-					"editor.defaultFormatter": "ms-python.black-formatter",
+					"editor.defaultFormatter": "charliermarsh.ruff",
 					"editor.formatOnSave": true
 				}
 			}

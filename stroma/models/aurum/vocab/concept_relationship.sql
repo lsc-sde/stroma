@@ -5,10 +5,10 @@ MODEL (
 );
 
 SELECT
-  cr.concept_id_1,
-  cr.concept_id_2,
-  cr.relationship_id,
-  cr.valid_start_date,
-  cr.valid_end_date,
-  cr.invalid_reason
+  cr.concept_id_1::INT,
+  cr.concept_id_2::INT,
+  cr.relationship_id::TEXT,
+  cr.valid_start_date::DATE,
+  cr.valid_end_date::DATE,
+  cr.invalid_reason::TEXT
 FROM silver.concept_relationship AS cr

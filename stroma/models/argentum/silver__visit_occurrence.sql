@@ -27,21 +27,21 @@ MODEL (
 );
 
 SELECT
-  vo.visit_occurrence_id,
-  vo.person_id,
-  vo.visit_concept_id,
-  vo.visit_start_date,
-  vo.visit_start_datetime,
-  vo.visit_end_date,
-  vo.visit_end_datetime,
-  vo.visit_type_concept_id,
-  vo.provider_id,
-  vo.care_site_id,
-  vo.visit_source_value,
-  vo.visit_source_concept_id,
-  vo.admitted_from_concept_id,
-  vo.admitted_from_source_value,
-  vo.discharged_to_concept_id,
-  vo.discharged_to_source_value,
-  vo.preceding_visit_occurrence_id
+  vo.visit_occurrence_id::INT,
+  vo.person_id::INT,
+  vo.visit_concept_id::INT,
+  vo.visit_start_date::DATE,
+  vo.visit_start_datetime::TIMESTAMP,
+  vo.visit_end_date::DATE,
+  vo.visit_end_datetime::TIMESTAMP,
+  vo.visit_type_concept_id::INT,
+  vo.provider_id::INT,
+  vo.care_site_id::INT,
+  vo.visit_source_value::TEXT,
+  vo.visit_source_concept_id::INT,
+  vo.admitted_from_concept_id::INT,
+  vo.admitted_from_source_value::TEXT,
+  vo.discharged_to_concept_id::INT,
+  vo.discharged_to_source_value::TEXT,
+  vo.preceding_visit_occurrence_id::INT
 FROM bronze.visit_occurrence AS vo

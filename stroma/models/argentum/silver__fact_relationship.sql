@@ -14,9 +14,9 @@ MODEL (
 );
 
 SELECT
-  fr.domain_concept_id_1,
-  fr.fact_id_1,
-  fr.domain_concept_id_2,
-  fr.fact_id_2,
-  fr.relationship_concept_id
+  fr.domain_concept_id_1::INT,
+  fr.fact_id_1::INT,
+  fr.domain_concept_id_2::INT,
+  fr.fact_id_2::INT,
+  fr.relationship_concept_id::INT
 FROM bronze.fact_relationship AS fr

@@ -2,7 +2,10 @@ MODEL (
   name silver.episode,
   kind FULL,
   cron '@monthly',
+<<<<<<< HEAD
   grain episode_id,
+=======
+>>>>>>> origin/main
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing information about episodes of care in the OMOP CDM',
   column_descriptions 
@@ -24,17 +27,17 @@ MODEL (
 );
 
 SELECT
-  e.episode_id,
-  e.person_id,
-  e.episode_concept_id,
-  e.episode_start_date,
-  e.episode_start_datetime,
-  e.episode_end_date,
-  e.episode_end_datetime,
-  e.episode_parent_id,
-  e.episode_number,
-  e.episode_object_concept_id,
-  e.episode_type_concept_id,
-  e.episode_source_value,
-  e.episode_source_concept_id
+  e.episode_id::INT,
+  e.person_id::INT,
+  e.episode_concept_id::INT,
+  e.episode_start_date::DATE,
+  e.episode_start_datetime::TIMESTAMP,
+  e.episode_end_date::DATE,
+  e.episode_end_datetime::TIMESTAMP,
+  e.episode_parent_id::INT,
+  e.episode_number::INT,
+  e.episode_object_concept_id::INT,
+  e.episode_type_concept_id::INT,
+  e.episode_source_value::TEXT,
+  e.episode_source_concept_id::INT
 FROM bronze.episode AS e

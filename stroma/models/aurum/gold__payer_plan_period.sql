@@ -27,21 +27,21 @@ MODEL (
 );
 
 SELECT
-  payer_plan_period_id,
-  person_id,
-  payer_plan_period_start_date,
-  payer_plan_period_end_date,
-  payer_concept_id,
-  payer_source_value,
-  payer_source_concept_id,
-  plan_concept_id,
-  plan_source_value,
-  plan_source_concept_id,
-  sponsor_concept_id,
-  sponsor_source_value,
-  sponsor_source_concept_id,
-  family_source_value,
-  stop_reason_concept_id,
-  stop_reason_source_value,
-  stop_reason_source_concept_id
+  payer_plan_period_id::INT,
+  person_id::INT,
+  payer_plan_period_start_date::DATE,
+  payer_plan_period_end_date::DATE,
+  payer_concept_id::INT,
+  payer_source_value::TEXT,
+  payer_source_concept_id::INT,
+  plan_concept_id::INT,
+  plan_source_value::TEXT,
+  plan_source_concept_id::INT,
+  sponsor_concept_id::INT,
+  sponsor_source_value::TEXT,
+  sponsor_source_concept_id::INT,
+  family_source_value::TEXT,
+  stop_reason_concept_id::INT,
+  stop_reason_source_value::TEXT,
+  stop_reason_source_concept_id::INT
 FROM silver.payer_plan_period

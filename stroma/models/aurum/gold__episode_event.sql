@@ -12,7 +12,7 @@ MODEL (
 );
 
 SELECT
-  ee.episode_id,
-  ee.event_id,
-  ee.episode_event_field_concept_id
+  ee.episode_id::INT,
+  ee.event_id::INT,
+  ee.episode_event_field_concept_id::INT
 FROM silver.episode_event AS ee

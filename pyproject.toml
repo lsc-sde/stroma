@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = { file = "LICENSE" }
 authors = [{ name = "vvcb" }]
-dependencies = ["python-dotenv", "sqlmesh[github,web]>=0.149.0"]
+dependencies = ["python-dotenv", "sqlmesh[github,web]>=0.152.0"]
 dynamic = ["version"]
 
 [tool.setuptools]
@@ -23,12 +23,8 @@ Homepage = "https://github.com/lsc-sde/stroma"
 # Documentation = "https://lsc-sde.github.io/stroma/"
 
 [project.optional-dependencies]
-databricks = [
-    "sqlmesh[databricks,postgres]>=0.149.0",
-]
-mssql = [
-    "sqlmesh[mssql]>=0.149.0",
-]
+databricks = ["sqlmesh[databricks,postgres]>=0.152.0"]
+mssql = ["sqlmesh[mssql]>=0.152.0"]
 
 [dependency-groups]
 dev = [

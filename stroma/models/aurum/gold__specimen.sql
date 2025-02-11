@@ -25,19 +25,19 @@ MODEL (
 );
 
 SELECT
-  s.specimen_id,
-  s.person_id,
-  s.specimen_concept_id,
-  s.specimen_type_concept_id,
-  s.specimen_date,
-  s.specimen_datetime,
-  s.quantity,
-  s.unit_concept_id,
-  s.anatomic_site_concept_id,
-  s.disease_status_concept_id,
-  s.specimen_source_id,
-  s.specimen_source_value,
-  s.unit_source_value,
-  s.anatomic_site_source_value,
-  s.disease_status_source_value
+  s.specimen_id::INT,
+  s.person_id::INT,
+  s.specimen_concept_id::INT,
+  s.specimen_type_concept_id::INT,
+  s.specimen_date::DATE,
+  s.specimen_datetime::TIMESTAMP,
+  s.quantity::REAL,
+  s.unit_concept_id::INT,
+  s.anatomic_site_concept_id::INT,
+  s.disease_status_concept_id::INT,
+  s.specimen_source_id::TEXT,
+  s.specimen_source_value::TEXT,
+  s.unit_source_value::TEXT,
+  s.anatomic_site_source_value::TEXT,
+  s.disease_status_source_value::TEXT
 FROM stg_gold.stg__specimen AS s

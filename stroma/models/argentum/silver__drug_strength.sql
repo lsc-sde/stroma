@@ -20,16 +20,16 @@ MODEL (
   ));
 
 SELECT
-  ds.drug_concept_id,
-  ds.ingredient_concept_id,
-  ds.amount_value,
-  ds.amount_unit_concept_id,
-  ds.numerator_value,
-  ds.numerator_unit_concept_id,
-  ds.denominator_value,
-  ds.denominator_unit_concept_id,
-  ds.box_size,
-  ds.valid_start_date,
-  ds.valid_end_date,
-  ds.invalid_reason
+  ds.drug_concept_id::INT,
+  ds.ingredient_concept_id::INT,
+  ds.amount_value::REAL,
+  ds.amount_unit_concept_id::INT,
+  ds.numerator_value::REAL,
+  ds.numerator_unit_concept_id::INT,
+  ds.denominator_value::REAL,
+  ds.denominator_unit_concept_id::INT,
+  ds.box_size::INT,
+  ds.valid_start_date::DATE,
+  ds.valid_end_date::DATE,
+  ds.invalid_reason::TEXT
 FROM bronze.drug_strength AS ds

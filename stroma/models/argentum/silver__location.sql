@@ -22,16 +22,16 @@ MODEL (
 );
 
 SELECT
-  l.location_id,
-  l.address_1,
-  l.address_2,
-  l.city,
-  l.state,
-  l.zip,
-  l.county,
-  l.location_source_value,
-  l.country_concept_id,
-  l.country_source_value,
-  l.latitude,
-  l.longitude
+  l.location_id::INT,
+  l.address_1::TEXT,
+  l.address_2::TEXT,
+  l.city::TEXT,
+  l.state::TEXT,
+  l.zip::TEXT,
+  l.county::TEXT,
+  l.location_source_value::TEXT,
+  l.country_concept_id::INT,
+  l.country_source_value::TEXT,
+  l.latitude::REAL,
+  l.longitude::REAL
 FROM bronze.location AS l
