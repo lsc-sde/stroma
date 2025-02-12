@@ -51,9 +51,9 @@ jobs:
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh plan -p "../stroma"
-          sqlmesh apply -p vc
-
+          sqlmesh plan --context ../stroma/
+          sqlmesh apply --context ../stroma/ -p vc
+          
       # Run SQLMesh models in the environment
       - name: Run SQLMesh Models
         run: |
