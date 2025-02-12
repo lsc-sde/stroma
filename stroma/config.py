@@ -4,7 +4,7 @@ import os
 import logging
 from pathlib import Path
 from sqlmesh.core.config import Config
- 
+  
 from sqlmesh.core.config import (
     ModelDefaultsConfig,
     GatewayConfig,
