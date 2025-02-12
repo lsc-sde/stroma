@@ -31,6 +31,7 @@ jobs:
       - name: Install SQLMesh
         run: |
           pip install sqlmesh[databricks,postgres,github]
+          pip install duckdb
 
       # Run SQLMesh
       - name: Run CI/CD Bot

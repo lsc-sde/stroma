@@ -139,7 +139,7 @@ if EnumGateway.MSSQL in enabled_gateways:
         )
 
 
-class SQLMeshSettings(BaseModel):  
+class SQLMeshSettings(BaseModel):   
     """
     SQLMeshSettings class represents the settings for SQLMesh.
 
