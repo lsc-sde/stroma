@@ -52,7 +52,7 @@ class EnumMedallionLayer(str, Enum):
 
 
 state_schema: str = os.getenv("STATE_SCHEMA", "stroma")
-default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DUCKDB)
+default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DATABRICKS)
 
 gateways = {}
 
