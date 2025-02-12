@@ -14,13 +14,7 @@ jobs:
   Deploy-SQLMesh:
     runs-on: ${{ inputs.vm-image }}
     environment: ${{ inputs.environment}}
-    env:
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__TYPE: "databricks"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__SERVER_HOSTNAME: "XXXXXXXXXXXXXXX"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__HTTP_PATH: "XXXXXXXXXXXX"
-      SQLMESH__GATEWAYS__STATE_SCHEMA: "stroma"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__ACCESS_TOKEN: "XXXXXXXXXXXX"
-      SQLMESH__DEFAULT_GATEWAY: "databricks"
+
 
     steps:
       # Checkout the repository code
@@ -36,10 +30,13 @@ jobs:
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          pip install sqlmesh[databricks,postgres,github,duckdb]
+          pip install sqlmesh[databricks,postgres,github]
 
       # Run SQLMesh
       - name: Run CI/CD Bot
+        env:
+          SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__TYPE: "databricks"
+          SQLMESH__DEFAULT_GATEWAY: "databricks"
         run: |
           sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
 
