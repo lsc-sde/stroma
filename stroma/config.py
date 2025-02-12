@@ -61,7 +61,7 @@ gateways = {}
 # This avoids reading in env variables that may not exist or looking for libraries that are not installed
 
 enabled_gateways = [
-    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS", "duckdb").split(",")
+    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS", "databricks").split(",")
 ]
 
 # Make sure default gateway is in enabled
