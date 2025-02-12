@@ -3,8 +3,9 @@ from dotenv import find_dotenv, load_dotenv
 import os
 import logging
 from pathlib import Path   
-from sqlmesh.core.config import Config
-  
+from sqlmesh.core.config import Config, AutoCategorizationMode, CategorizerConfig
+from sqlmesh.integrations.github.cicd.config import GithubCICDBotConfig, MergeMethod
+
 from sqlmesh.core.config import (
     ModelDefaultsConfig,
     GatewayConfig,
@@ -218,4 +219,24 @@ variables.update(
         "minimum_observation_period_start_date": "2005-01-01",
     }
 )
-config = Config(**dict(SQLMeshSettings(project="stroma", variables=variables)))
+
+cicd_variables=GithubCICDBotConfig(
+        invalidate_environment_after_deploy=False,
+        enable_deploy_command=True,
+        merge_method=MergeMethod.SQUASH,
+        command_namespace="#SQLMesh",
+        auto_categorize_changes=CategorizerConfig(
+            external=AutoCategorizationMode.FULL,
+            python=AutoCategorizationMode.FULL,
+            sql=AutoCategorizationMode.FULL,
+            seed=AutoCategorizationMode.FULL,
+        ),
+        default_pr_start="1 week ago",
+        skip_pr_backfill=False,
+        run_on_deploy_to_prod=False,
+)
+
+config = Config(**dict(SQLMeshSettings(project="stroma", variables=variables)), cicd_bot=cicd_variables)
+
+
+

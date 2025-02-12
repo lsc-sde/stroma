@@ -51,10 +51,4 @@ jobs:
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh plan --context ../stroma/
-          sqlmesh apply --context ../stroma/ -p vc
-          
-      # Run SQLMesh models in the environment
-      - name: Run SQLMesh Models
-        run: |
-          sqlmesh run --environment ${{ inputs.environment }}
+          sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
