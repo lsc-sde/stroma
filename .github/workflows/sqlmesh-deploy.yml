@@ -15,12 +15,24 @@ jobs:
     runs-on: ${{ inputs.vm-image }}
     environment: ${{ inputs.environment}}
     env:
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__TYPE: "databricks"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__SERVER_HOSTNAME: "XXXXXXXXXXXXXXX"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__HTTP_PATH: "XXXXXXXXXXXX"
-      SQLMESH__GATEWAYS__STATE_SCHEMA: "stroma"
-      SQLMESH__GATEWAYS__DATABRICKS__CONNECTION__ACCESS_TOKEN: "XXXXXXXXXXXX"
-      SQLMESH__DEFAULT_GATEWAY: "databricks"
+      DEFAULT_GATEWAY: "databricks"
+      ENABLED_GATEWAY: "databricks"
+      STATE_SCHEMA: "stroma"
+      DUCKDB_DATABASE: ""
+      DUCKDB_STATE_DATABASE: ""
+      DATABRICKS_CONCURRENT_TASKS:  '8'
+      DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
+      DATABRICKS_SERVER_HOSTNAME:  ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+      DATABRICKS_HTTP_PATH:  ${{ secrets.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_CATALOG:  ${{ secrets.DATABRICKS_CATALOG }}
+      DATABRICKS_CATALOG_SOURCE:  ${{ secrets.DATABRICKS_CATALOG_SOURCE }}
+      DATABRICKS_STATE_DB_USER: ${{ secrets.DATABRICKS_STATE_DB_USER }}
+      DATABRICKS_STATE_DB_PASSWORD: ${{ secrets.DATABRICKS_STATE_DB_PASSWORD }}
+      DATABRICKS_SCHEMA_BASE: ${{ secrets.DATABRICKS_SCHEMA }}
+      DATABRICKS_SCHEMA_VOCAB: ${{ secrets.DATABRICKS_SCHEMA }}
+      DATABRICKS_STATE_DB_HOST: ${{ secrets.DATABRICKS_STATE_DB_HOST }}
+      DATABRICKS_STATE_DB_PORT: ${{ secrets.DATABRICKS_STATE_DB_PORT }}
+      DATABRICKS_STATE_DB_DATABASE: ${{ secrets.DATABRICKS_STATE_DB_DATABASE }}
 
     steps:
       # Checkout the repository code
@@ -31,32 +43,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.12
 
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          pip install sqlmesh[databricks,postgres]
-
-      # Run SQLMesh
-      - name: Run CI/CD Bot
-        run: |
-          sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
-
-      # Set up Databricks environment variables (using GitHub Secrets)
-      - name: Set up Databricks Environment Variables
-        run: |
-          echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
-          echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
-          echo "SQLMESH_DEFAULT_GATEWAY=databricks" >> $GITHUB_ENV
+          pip install sqlmesh[databricks,postgres,github]
+          pip install python-dotenv
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh plan --environment ${{ inputs.environment }}
-          sqlmesh apply --environment ${{ inputs.environment }}
-
-      # Run SQLMesh models in the environment
-      - name: Run SQLMesh Models
-        run: |
-          sqlmesh run --environment ${{ inputs.environment }}
+          sqlmesh_cicd -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }} run-all

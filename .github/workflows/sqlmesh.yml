@@ -1,12 +1,9 @@
 name: SQLMesh Workflow
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 'develop'
-      - 'feature/cicd/*'
-    paths:
-      - stroma/**  
+  pull_request:
+    types:
+    - synchronize
+    - opened
       
 jobs:
   Deploy-SQLMesh-Dev: 
