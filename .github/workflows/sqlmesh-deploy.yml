@@ -14,7 +14,23 @@ jobs:
   Deploy-SQLMesh:
     runs-on: ${{ inputs.vm-image }}
     environment: ${{ inputs.environment}}
-
+    env:
+      SQLMESH__DEFAULT_GATEWAY: "databricks"
+      SQLMESH__ENABLED_GATEWAY: "databricks"
+      SQLMESH__STATE_SCHEMA: "stroma"
+      SQLMESH__DATABRICKS_CONCURRENT_TASKS:  '8'
+      SQLMESH__DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
+      SQLMESH__DATABRICKS_SERVER_HOSTNAME:  ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+      SQLMESH__DATABRICKS_HTTP_PATH:  ${{ secrets.DATABRICKS_HTTP_PATH }}
+      SQLMESH__DATABRICKS_CATALOG:  ${{ secrets.DATABRICKS_CATALOG }}
+      SQLMESH__DATABRICKS_CATALOG_SOURCE:  ${{ secrets.DATABRICKS_CATALOG_SOURCE }}
+      SQLMESH__DATABRICKS_STATE_DB_USER: ${{ secrets.DATABRICKS_STATE_DB_USER }}
+      SQLMESH__DATABRICKS_STATE_DB_PASSWORD: ${{ secrets.DATABRICKS_STATE_DB_PASSWORD }}
+      SQLMESH__DATABRICKS_SCHEMA_BASE: ${{ secrets.DATABRICKS_SCHEMA }}
+      SQLMESH__DATABRICKS_SCHEMA_VOCAB: ${{ secrets.DATABRICKS_SCHEMA }}
+      SQLMESH__DATABRICKS_STATE_DB_HOST: ${{ secrets.DATABRICKS_STATE_DB_HOST }}
+      SQLMESH__DATABRICKS_STATE_DB_PORT: ${{ secrets.DATABRICKS_STATE_DB_PORT }}
+      SQLMESH__DATABRICKS_STATE_DB_DATABASE: ${{ secrets.DATABRICKS_STATE_DB_DATABASE }}
 
     steps:
       # Checkout the repository code
@@ -32,18 +48,11 @@ jobs:
         run: |
           pip install sqlmesh[databricks,postgres,github]
 
-      # Set up Databricks environment variables (using GitHub Secrets)
-      - name: Set up Databricks Environment Variables
-        run: |
-          echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
-          echo "DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" >> $GITHUB_ENV
-          echo "SQLMESH_DEFAULT_GATEWAY=databricks" >> $GITHUB_ENV
-
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
           sqlmesh plan -p vc
-          sqlmesh apply --environment ${{ inputs.environment }}
+          sqlmesh apply -p vc
 
       # Run SQLMesh models in the environment
       - name: Run SQLMesh Models
