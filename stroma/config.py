@@ -2,7 +2,7 @@ from dotenv import find_dotenv, load_dotenv
  
 import os
 import logging
-from pathlib import Path 
+from pathlib import Path  
 from sqlmesh.core.config import Config
   
 from sqlmesh.core.config import (
