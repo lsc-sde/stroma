@@ -132,7 +132,7 @@ if EnumGateway.MSSQL in enabled_gateways:
             state_schema=state_schema,
         )
 
-        gateways["mssql"] = gateway_mssql  
+        gateways["mssql"] = gateway_mssql   
     except Exception as e:
         logging.error(
             f"Error setting up MS SQL Server gateway. Ensure all environment variables are set correctly. {e}"

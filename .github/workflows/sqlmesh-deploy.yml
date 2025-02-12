@@ -42,7 +42,7 @@ jobs:
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh plan --environment ${{ inputs.environment }}
+          sqlmesh plan -p vc
           sqlmesh apply --environment ${{ inputs.environment }}
 
       # Run SQLMesh models in the environment
