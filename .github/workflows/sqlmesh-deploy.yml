@@ -25,13 +25,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.12
 
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
           pip install sqlmesh[databricks,postgres,github]
-          pip install duckdb
 
       # Run SQLMesh
       - name: Run CI/CD Bot
