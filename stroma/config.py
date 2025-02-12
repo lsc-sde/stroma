@@ -210,7 +210,7 @@ class OMOPSettings(BaseModel):
             return Path(os.getenv("DUCKDB_DATABASE")).stem
 
 
-variables = OMOPSettings().model_dump(mode="json")
+variables = OMOPSettings().model_dump(mode="json") 
 
 
 variables.update(
