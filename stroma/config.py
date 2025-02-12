@@ -44,7 +44,7 @@ class EnumGateway(str, Enum):
 
 class EnumMedallionLayer(str, Enum):
     BASE = os.getenv(
-        f"{os.getenv('DEFAULT_GATEWAY', default='duckdb').upper()}_SCHEMA_BASE", "base"
+        f"{os.getenv('DEFAULT_GATEWAY', default='databricks').upper()}_SCHEMA_BASE", "base"
     )
     BRONZE = "bronze"
     SILVER = "silver"
