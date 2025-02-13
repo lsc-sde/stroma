@@ -18,7 +18,6 @@ jobs:
       DEFAULT_GATEWAY: "databricks"
       ENABLED_GATEWAYS: "databricks"
       STATE_SCHEMA: "stroma"
-      DATABRICKS_CONCURRENT_TASKS: '8'
       DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
       DATABRICKS_SERVER_HOSTNAME:  ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
       DATABRICKS_HTTP_PATH:  ${{ secrets.DATABRICKS_HTTP_PATH }}
@@ -52,7 +51,7 @@ jobs:
       # Install SQLMesh
       - name: Run SQLMesh
         run: |
-          sqlmesh migrate -p vc
+          sqlmesh plan -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }}
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
