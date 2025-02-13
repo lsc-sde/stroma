@@ -48,11 +48,6 @@ jobs:
           pip install sqlmesh[databricks,postgres,github]
           pip install python-dotenv
 
-      # Install SQLMesh
-      - name: Run SQLMesh
-        run: |
-          sqlmesh plan -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }} run-all
-
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
