@@ -152,7 +152,7 @@ class SQLMeshSettings(BaseModel):
         variables (dict): A dictionary of variables.
         format (FormatConfig): The configuration for formatting.
     """
-
+ 
     model_config = ConfigDict(protected_namespaces=())
 
     project: str

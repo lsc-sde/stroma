@@ -16,7 +16,7 @@ jobs:
     environment: ${{ inputs.environment}}
     env:
       DEFAULT_GATEWAY: "databricks"
-      ENABLED_GATEWAY: "databricks"
+      ENABLED_GATEWAYS: "databricks"
       STATE_SCHEMA: "stroma"
       DUCKDB_DATABASE: ""
       DUCKDB_STATE_DATABASE: ""
