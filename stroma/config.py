@@ -44,7 +44,7 @@ class EnumGateway(str, Enum):
 
 class EnumMedallionLayer(str, Enum):
     BASE = os.getenv(
-        f"{os.getenv('DEFAULT_GATEWAY', default='databricks').upper()}_SCHEMA_BASE", "base"
+        f"{os.getenv('DEFAULT_GATEWAY', default='duckdb').upper()}_SCHEMA_BASE", "base"
     )
     BRONZE = "bronze"
     SILVER = "silver"
@@ -52,7 +52,7 @@ class EnumMedallionLayer(str, Enum):
 
 
 state_schema: str = os.getenv("STATE_SCHEMA", "stroma")
-default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DATABRICKS)
+default_gateway: str = os.getenv("DEFAULT_GATEWAY", EnumGateway.DUCKDB)
 
 gateways = {}
 
@@ -61,7 +61,7 @@ gateways = {}
 # This avoids reading in env variables that may not exist or looking for libraries that are not installed
 
 enabled_gateways = [
-    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS", "databricks").split(",")
+    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS", "duckdb").split(",")
 ]
 
 # Make sure default gateway is in enabled
