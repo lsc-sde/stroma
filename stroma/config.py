@@ -79,7 +79,7 @@ if EnumGateway.DUCKDB in enabled_gateways:
             connection=DuckDBConnectionConfig(database=database),
             state_connection=DuckDBConnectionConfig(database=state_database),
             state_schema=state_schema,
-        ) 
+        )  
 
         gateways["duckdb"] = gateway_duckdb
 
