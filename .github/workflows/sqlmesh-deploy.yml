@@ -52,7 +52,7 @@ jobs:
       # Install SQLMesh
       - name: Run SQLMesh
         run: |
-          sqlmesh migrate
+          sqlmesh migrate -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }}
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
