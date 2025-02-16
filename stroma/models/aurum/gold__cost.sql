@@ -3,6 +3,15 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain cost_id,
+  references (
+    cost_event_id,
+    cost_domain_id,
+    cost_type_concept_id,
+    currency_concept_id,
+    payer_plan_period_id,
+    revenue_code_concept_id,
+    drg_concept_id
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'This table stores the cost details for medical events recorded in the OMOP clinical event tables',
   column_descriptions (
