@@ -3,6 +3,17 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain device_exposure_id,
+  references (
+    person_id,
+    device_concept_id AS concept_id,
+    device_type_concept_id AS concept_id,
+    provider_id AS provider_id,
+    visit_occurrence_id,
+    visit_detail_id,
+    device_source_concept_id AS concept_id,
+    unit_concept_id AS concept_id,
+    unit_source_concept_id AS concept_id
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'This table stores records of device exposures for persons in the OMOP database.',
   column_descriptions (
