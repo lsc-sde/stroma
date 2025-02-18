@@ -3,6 +3,18 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain visit_detail_id,
+  references (
+    person_id,
+    visit_detail_concept_id AS concept_id,
+    visit_detail_type_concept_id AS concept_id, 
+    provider_id,
+    care_site_id,
+    visit_detail_source_concept_id AS concept_id, 
+    discharged_to_concept_id,
+    preceding_visit_detail_id AS visit_detail_id,
+    parent_visit_detail_id AS visit_detail_id,
+    visit_occurrence_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The visit_detail table captures detailed information about individual components of a healthcare visit, including specific encounters and services provided.',
   column_descriptions (

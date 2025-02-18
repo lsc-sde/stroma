@@ -3,6 +3,19 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain observation_id,
+  references (
+    person_id,
+    observation_concept_id AS concept_id, 
+    observation_type_concept_id AS concept_id,
+    value_as_concept_id AS concept_id,
+    qualifier_concept_id AS concept_id,
+    unit_concept_id AS concept_id,
+    provider_id,
+    visit_occurrence_id,
+    visit_detail_id,
+    observation_source_concept_id AS concept_id,
+    obs_event_field_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The observation table captures clinical observations made about a person, including measurements, assessments, and other relevant clinical findings.',
   column_descriptions (

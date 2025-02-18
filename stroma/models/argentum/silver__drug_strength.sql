@@ -2,6 +2,14 @@ MODEL (
   name silver.drug_strength,
   kind FULL,
   cron '@monthly',
+  references (
+    person_id,
+    drug_concept_id AS concept_id,
+    ingredient_concept_id AS concept_id,
+    amount_unit_concept_id AS concept_id,
+    numerator_unit_concept_id AS concept_id,
+    denominator_unit_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'), 
   description 'The drug_strength table stores data on the strength and concentration of drug ingredients, including measurement units and validity periods.', 
   column_descriptions (

@@ -3,6 +3,11 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain note_nlp_id,
+  references (
+    section_concept_id AS concept_id,
+    note_nlp_concept_id AS concept_id,
+    note_nlp_source_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The note_nlp table captures the results of natural language processing applied to clinical notes, detailing identified terms and their context.',
   column_descriptions (

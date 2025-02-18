@@ -2,6 +2,11 @@ MODEL (
   name gold.fact_relationship,
   kind FULL,
   cron '@monthly',
+  references (
+    domain_concept_id_1 AS concept_id,
+    domain_concept_id_2 AS concept_id,
+    relationship_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table capturing relationships between facts in the OMOP CDM',
   column_descriptions (

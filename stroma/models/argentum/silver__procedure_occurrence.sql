@@ -3,6 +3,16 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain procedure_occurrence_id,
+  references (
+    person_id,
+    procedure_concept_id AS concept_id, 
+    procedure_type_concept_id AS concept_id,
+    modifier_concept_id AS concept_id,
+    provider_id,
+    visit_occurrence_id,
+    visit_detail_id,
+    procedure_source_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The procedure_occurrence table captures details about procedures performed on a person, including the type, date, and provider of the procedure.', 
   column_descriptions (

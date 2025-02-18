@@ -3,6 +3,17 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain person_id,
+  references (
+    gender_concept_id AS concept_id,
+    race_concept_id AS concept_id, 
+    ethnicity_concept_id AS concept_id,
+    location_id,
+    provider_id,
+    care_site_id,
+    gender_source_concept_id AS concept_id,
+    race_source_concept_id AS concept_id,
+    ethnicity_source_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The person table contains demographic details about each individual in the database, serving as the central entity for all clinical data.',
   column_descriptions (
