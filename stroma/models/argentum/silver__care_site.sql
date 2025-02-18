@@ -16,10 +16,10 @@ MODEL (
 );
 
 SELECT
-  cs.care_site_id::INT, /* A unique identifier for each Care Site. */
+  cs.care_site_id::BIGINT, /* A unique identifier for each Care Site. */
   cs.care_site_name::TEXT,
-  cs.place_of_service_concept_id::INT,
-  cs.location_id::INT,
+  cs.place_of_service_concept_id::BIGINT,
+  cs.location_id::BIGINT,
   cs.care_site_source_value::TEXT,
   cs.place_of_service_source_value::TEXT
 FROM bronze.care_site AS cs

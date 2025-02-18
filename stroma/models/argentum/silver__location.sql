@@ -25,7 +25,7 @@ MODEL (
 );
 
 SELECT
-  l.location_id::INT,
+  l.location_id::BIGINT,
   l.address_1::TEXT,
   l.address_2::TEXT,
   l.city::TEXT,
