@@ -3,6 +3,17 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain visit_occurrence_id,
+  references (
+    person_id,
+    visit_concept_id AS concept_id,
+    visit_type_concept_id AS concept_id, 
+    provider_id,
+    care_site_id,
+    visit_source_concept_id AS concept_id, 
+    admitted_from_concept_id AS concept_id,
+    discharged_to_concept_id AS concept_id,
+    preceding_visit_occurrence_id AS visit_occurrence_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The visit_occurrence table captures details about each healthcare visit, including the type, date, and duration of the visit.',
   column_descriptions (

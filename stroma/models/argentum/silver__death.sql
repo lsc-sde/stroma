@@ -3,6 +3,12 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain person_id,
+  references (
+    person_id,
+    death_type_concept_id AS concept_id,
+    cause_concept_id AS concept_id,
+    cause_source_concept_id AS concept_id
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'This table stores records of death details for persons in the OMOP database.',
   column_descriptions (

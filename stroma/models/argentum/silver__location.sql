@@ -3,6 +3,9 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain location_id,
+  references (
+    country_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing geographic and address information for persons and care sites in the OMOP CDM',
   column_descriptions (
@@ -22,7 +25,7 @@ MODEL (
 );
 
 SELECT
-  l.location_id::INT,
+  l.location_id::BIGINT,
   l.address_1::TEXT,
   l.address_2::TEXT,
   l.city::TEXT,

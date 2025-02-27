@@ -3,6 +3,17 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain note_id,
+  references (
+    person_id,
+    note_type_concept_id AS concept_id, 
+    note_class_concept_id AS concept_id,
+    encoding_concept_id AS concept_id,
+    language_concept_id AS concept_id,
+    provider_id,
+    visit_occurrence_id,
+    visit_detail_id,
+    note_event_field_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The note table contains unstructured clinical notes recorded during patient care, providing detailed narrative information.',
   column_descriptions (
