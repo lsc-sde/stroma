@@ -23,3 +23,4 @@ SELECT
   cs.care_site_source_value,
   cs.place_of_service_source_value
 FROM @catalog_src.@base.care_site AS cs
+

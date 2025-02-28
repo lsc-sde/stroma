@@ -24,7 +24,7 @@ from typing import Dict, Any, Optional
 load_dotenv(find_dotenv(), override=True)
 
 ###############################################################################
-# SQLMESH CONFIGURATION
+# SQLMESH CONFIGURATION   
 ###############################################################################
 
 class EnumGateway(str, Enum):
@@ -231,7 +231,7 @@ cicd_variables=GithubCICDBotConfig(
             sql=AutoCategorizationMode.FULL,
             seed=AutoCategorizationMode.FULL,
         ),
-        default_pr_start="1 week ago",
+        default_pr_start="1 year ago",
         skip_pr_backfill=False,
         run_on_deploy_to_prod=False,
 )
