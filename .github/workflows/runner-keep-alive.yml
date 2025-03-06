@@ -1,0 +1,17 @@
+name: Keep Runner Alive Workflow
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */240 * * *" # Runs every 10 days
+
+jobs:
+  Keep-Alive:
+    runs-on: ${{ matrix.runner }}
+
+    strategy:
+      matrix:
+        runner: [dev-vm-01, prod-vm-01]
+
+    steps:
+      - name: Print Message
+        run: echo "Keeping Runner ${{ matrix.runner }} Alive"
