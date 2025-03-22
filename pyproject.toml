@@ -23,8 +23,8 @@ Homepage = "https://github.com/lsc-sde/stroma"
 # Documentation = "https://lsc-sde.github.io/stroma/"
 
 [project.optional-dependencies]
-databricks = ["sqlmesh[databricks,postgres]>=0.152.0"]
-mssql = ["sqlmesh[mssql]>=0.152.0"]
+databricks = ["sqlmesh[databricks,postgres]"]
+mssql = ["sqlmesh[mssql]"]
 
 [dependency-groups]
 dev = [

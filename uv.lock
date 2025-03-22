@@ -2193,9 +2193,9 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "python-dotenv" },
-    { name = "sqlmesh", extras = ["databricks", "postgres"], marker = "extra == 'databricks'", specifier = ">=0.152.0" },
+    { name = "sqlmesh", extras = ["databricks", "postgres"], marker = "extra == 'databricks'" },
     { name = "sqlmesh", extras = ["github", "web"], specifier = "~=0.167" },
-    { name = "sqlmesh", extras = ["mssql"], marker = "extra == 'mssql'", specifier = ">=0.152.0" },
+    { name = "sqlmesh", extras = ["mssql"], marker = "extra == 'mssql'" },
 ]
 
 [package.metadata.requires-dev]
