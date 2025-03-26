@@ -26,17 +26,12 @@ os.environ['DATABRICKS_CONCURRENT_TASKS']='8'
 os.environ['DATABRICKS_STATE_DB_PORT']='5432'
 os.environ['DATABRICKS_STATE_DB_DATABASE']="sqlmesh_stroma"
 
-
 print('Environment variables set.')
 
 # COMMAND ----------
-
-files = dbutils.fs.ls("https://api.github.com/repos/lsc-sde/stroma/contents/stroma/")  
-for file in files:
-    print(file.name)
-
-# COMMAND ----------
-# MAGIC %context ../stroma/
+import os
+cwd = os.getcwd()
+print(cwd)
 
 # COMMAND ----------
 
