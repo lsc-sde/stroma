@@ -31,7 +31,7 @@ print('Environment variables set.')
 
 # COMMAND ----------
 
-# MAGIC %fs ls  ../stroma/
+# MAGIC %fs ls  /../stroma/
 
 # COMMAND ----------
 # MAGIC %context ../stroma/
