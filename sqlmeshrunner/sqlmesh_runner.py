@@ -31,7 +31,7 @@ print('Environment variables set.')
 
 # COMMAND ----------
 
-files = dbutils.fs.ls("../stroma/")
+files = dbutils.fs.ls("/../stroma/")
 for file in files:
     print(file.name)
 
