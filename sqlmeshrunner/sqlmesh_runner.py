@@ -29,7 +29,7 @@ os.environ['DATABRICKS_STATE_DB_DATABASE']="sqlmesh_stroma"
 print('Environment variables set.')
 
 # COMMAND ----------
-%context /../stroma/
+%sqlmesh -p ../stroma/
 
 # COMMAND ----------
 
