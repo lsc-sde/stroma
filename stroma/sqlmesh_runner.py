@@ -29,6 +29,11 @@ os.environ['DATABRICKS_STATE_DB_DATABASE']="sqlmesh_stroma"
 print('Environment variables set.')
 
 # COMMAND ----------
+import os
+cwd = os.getcwd()
+print(cwd)
+
+# COMMAND ----------
 
 # Uncomment next line to run a migration when SQLMesh upgrade results in a request for migration.
 #  %migrate
