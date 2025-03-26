@@ -31,7 +31,7 @@ print('Environment variables set.')
 # COMMAND ----------
 import os
 cwd = os.getcwd()
-os.chdir("../stroma")
+os.chdir("../stroma/")
 print(cwd)
 
 # COMMAND ----------
