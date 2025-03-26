@@ -29,12 +29,6 @@ os.environ['DATABRICKS_STATE_DB_DATABASE']="sqlmesh_stroma"
 print('Environment variables set.')
 
 # COMMAND ----------
-import os
-os.chdir("../stroma/")
-cwd = os.getcwd() 
-print(cwd)
-
-# COMMAND ----------
 %context /../stroma/
 
 # COMMAND ----------
