@@ -35,7 +35,7 @@ cwd = os.getcwd()
 print(cwd)
 
 # COMMAND ----------
-%context ../stroma/
+%context /../stroma/
 
 # COMMAND ----------
 
