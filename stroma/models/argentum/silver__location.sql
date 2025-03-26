@@ -13,7 +13,7 @@ MODEL (
       address_1 = 'Primary address line',
       address_2 = 'Secondary address line',
       city = 'City of the location',
-      [state] = 'State or province of the location',
+      state = 'State or province of the location',
       zip = 'Postal code of the location',
       county = 'County of the location',
       location_source_value = 'Source value for the location',
