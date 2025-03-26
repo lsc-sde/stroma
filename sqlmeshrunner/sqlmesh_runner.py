@@ -31,7 +31,9 @@ print('Environment variables set.')
 
 # COMMAND ----------
 
-# MAGIC %fs ls  /../stroma/
+files = dbutils.fs.ls("../stroma/")
+for file in files:
+    print(file.name)
 
 # COMMAND ----------
 # MAGIC %context ../stroma/
