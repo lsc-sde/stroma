@@ -1,0 +1,59 @@
+name: SQLMesh Deployment
+
+on:
+  workflow_call:
+    inputs:
+     environment:
+        required: false
+        type: string
+     vm-image:
+        required: true
+        type: string
+
+jobs:
+  Deploy-SQLMesh:
+    runs-on: ${{ inputs.vm-image }}
+    permissions:
+      contents: write
+      issues: write
+      checks: write
+      pull-requests: write
+    environment: ${{ inputs.environment}}
+    env:
+      DEFAULT_GATEWAY: "databricks"
+      ENABLED_GATEWAYS: "databricks"
+      STATE_SCHEMA: "stroma"
+      DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
+      DATABRICKS_SERVER_HOSTNAME:  ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+      DATABRICKS_HTTP_PATH:  ${{ secrets.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_CATALOG:  ${{ secrets.DATABRICKS_CATALOG }}
+      DATABRICKS_CATALOG_SOURCE:  ${{ secrets.DATABRICKS_CATALOG_SOURCE }}
+      DATABRICKS_SCHEMA_BASE: ${{ secrets.DATABRICKS_SCHEMA }}
+      DATABRICKS_SCHEMA_VOCAB: ${{ secrets.DATABRICKS_SCHEMA }}
+      DATABRICKS_STATE_DB_HOST: ${{ secrets.DATABRICKS_STATE_DB_HOST }}
+      DATABRICKS_STATE_DB_PORT: ${{ secrets.DATABRICKS_STATE_DB_PORT }}
+      DATABRICKS_STATE_DB_DATABASE: ${{ secrets.DATABRICKS_STATE_DB_DATABASE }}
+      DATABRICKS_STATE_DB_USER: ${{ secrets.DATABRICKS_STATE_DB_USER }}
+      DATABRICKS_STATE_DB_PASSWORD: ${{ secrets.DATABRICKS_STATE_DB_PASSWORD }}
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      # Install SQLMesh
+      - name: Install SQLMesh
+        run: |
+          pip install sqlmesh[databricks,postgres,github]==0.154.0
+          pip install python-dotenv
+
+      # Run `sqlmesh plan` and `sqlmesh apply` for the environment
+      - name: Run SQLMesh Plan & Apply
+        run: |
+          sqlmesh_cicd -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }} run-all

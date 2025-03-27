@@ -1,43 +1,25 @@
-name: SQLMesh Bot
-run-name: 🚀SQLMesh Bot 🚀
+name: SQLMesh Workflow
 on:
   pull_request:
     types:
     - synchronize
     - opened
-   # Required if using required approvers to automate deployments
-  pull_request_review:
-    types:
-    - edited
-    - submitted
-    - dismissed
-# The latest commit is the one that will be used to create the PR environment and deploy to production
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+      
 jobs:
-  sqlmesh:
-    name: SQLMesh Actions Workflow
-    runs-on: ubuntu-latest
-    permissions:
-      # Required to access code in PR
-      contents: write
-      # Required to post comments
-      issues: write
-      # Required to update check runs
-      checks: write
-      # Required to merge
-      pull-requests: write
-    steps:
-      - name: Setup Python
-        uses: actions/setup-python@v4
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
-        with:
-          ref: refs/pull/${{ github.event.issue.pull_request && github.event.issue.number || github.event.pull_request.number  }}/merge
-      - name: Install SQLMesh + Dependencies
-        run: pip install -r requirements.txt
-        shell: bash
-      - name: Run CI/CD Bot
-        run: |
-          sqlmesh_cicd -p ${{ github.workspace }} github --token ${{ secrets.GITHUB_TOKEN }} run-all
+  Deploy-SQLMesh-Dev: 
+    uses: ./.github/workflows/sqlmesh-deploy.yml
+    name: Deploy SQLMesh Dev
+    secrets: inherit
+    with: 
+      vm-image: dev-vm-01
+      environment: Dev
+
+  Deploy-SQLMesh-Prod: 
+    uses: ./.github/workflows/sqlmesh-deploy.yml
+    needs: Deploy-SQLMesh-Dev
+    name: Deploy SQLMesh Prod
+    if: contains(github.ref, 'release/')
+    secrets: inherit
+    with: 
+      vm-image: prod-vm-01
+      environment: Prod
