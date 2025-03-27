@@ -13,6 +13,7 @@ from sqlmesh.core.config import (
     PostgresConnectionConfig,
     DuckDBConnectionConfig,
     MSSQLConnectionConfig,
+    AzureSQLConnectionConfig,
 )
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.config.ui import UIConfig
@@ -32,12 +33,12 @@ class EnumGateway(str, Enum):
     Enumeration class representing the default gateway options.
 
     Attributes:
-        DATABRICKS (str): Represents the Databricks gateway.
+        PROD_DATABRICKS (str): Represents the Production Databricks gateway.
         MSSQL (str): Represents the MSSQL gateway.
         DUCKDB (str): Represents the DuckDB gateway.
     """
 
-    DATABRICKS = "databricks"
+    PROD_DATABRICKS = "production_databricks"
     MSSQL = "mssql"
     DUCKDB = "duckdb"
 
@@ -89,9 +90,9 @@ if EnumGateway.DUCKDB in enabled_gateways:
         )
 
 # Databricks
-if EnumGateway.DATABRICKS in enabled_gateways:
+if EnumGateway.PROD_DATABRICKS in enabled_gateways:
     try:
-        gateway_databricks = GatewayConfig(
+        production_gateway_databricks = GatewayConfig(
             connection=DatabricksConnectionConfig(
                 server_hostname=os.environ["DATABRICKS_SERVER_HOSTNAME"],
                 http_path=os.environ["DATABRICKS_HTTP_PATH"],
@@ -99,21 +100,22 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 concurrent_tasks=os.getenv("DATABRICKS_CONCURRENT_TASKS", default=4),
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
-            state_connection=PostgresConnectionConfig(
-                host=os.environ["DATABRICKS_STATE_DB_HOST"],
-                port=os.environ["DATABRICKS_STATE_DB_PORT"],
-                user=os.environ["DATABRICKS_STATE_DB_USER"],
-                password=os.environ["DATABRICKS_STATE_DB_PASSWORD"],
-                database=os.environ["DATABRICKS_STATE_DB_DATABASE"],
+            state_connection=AzureSQLConnectionConfig( 
+                type="azuresql"
+                host=os.environ["AZURE_SQL_SERVER_STATE_HOST"],
+                port=os.environ["AZURE_SQL_SERVER_STATE_PORT"],
+                user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
+                password=os.environ["AZURE_SQL_SERVER_STATE_PASSWORD"],
+                database=os.environ["AZURE_SQL_STATE_DATABASE"],
             ),
             state_schema=state_schema,
         )
 
-        gateways["databricks"] = gateway_databricks
+        gateways["production_databricks"] = production_gateway_databricks
 
     except Exception as e:
         logging.error(
-            f"Error setting up Databricks gateway. Ensure all environment variables are set correctly. {e}"
+            f"Error setting up Production Databricks gateway. Ensure all environment variables are set correctly. {e}"
         )
 
 
