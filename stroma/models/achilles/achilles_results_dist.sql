@@ -3,9 +3,9 @@ MODEL (
   name @schema_achilles.achilles_results_dist,
   kind FULL,
   cron '@monthly',
-  blueprints (
-    (schema_achilles := silver_achilles),
-    (schema_achilles := silver_gold)
+   blueprints (
+    (schema_achilles := silver_achilles, src_schema := silver, @temp_schema := z_tmp_silver_achilles),
+    (schema_achilles := gold_achilles,  src_schema := gold, @temp_schema := z_tmp_gold_achilles)
 )
 );
 
