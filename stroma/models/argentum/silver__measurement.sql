@@ -2,7 +2,21 @@ MODEL (
   name silver.measurement,
   kind FULL,
   cron '@monthly',
-  grain unique_key,
+  grain measurement_id,
+  references (
+    person_id,
+    measurement_concept_id AS concept_id,
+    measurement_type_concept_id AS concept_id,
+    operator_concept_id AS concept_id,
+    value_as_concept_id AS concept_id,
+    unit_concept_id AS concept_id,
+    provider_id,
+    visit_occurrence_id,
+    visit_detail_id,
+    measurement_source_concept_id AS concept_id,
+    unit_source_concept_id AS concept_id,
+    meas_event_field_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing clinical measurements and observations for persons in the OMOP CDM',
   column_descriptions (

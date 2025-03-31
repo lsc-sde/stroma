@@ -3,6 +3,14 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain specimen_id,
+  references (
+    person_id,
+    specimen_concept_id AS concept_id,
+    specimen_type_concept_id AS concept_id, 
+    unit_concept_id AS concept_id,
+    anatomic_site_concept_id AS concept_id,
+    disease_status_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The specimen table contains details about biological specimens collected from patients, including type, collection date, and source.',
   column_descriptions (

@@ -1,7 +1,8 @@
 MODEL (
   name silver.vocabulary,
   kind VIEW,
-  cron '@yearly'
+  cron '@yearly',
+  grain vocabulary_id
 );
 
 SELECT

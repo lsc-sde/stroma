@@ -3,6 +3,18 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain visit_detail_id,
+  references (
+    person_id,
+    visit_detail_concept_id AS concept_id,
+    visit_detail_type_concept_id AS concept_id, 
+    provider_id,
+    care_site_id,
+    visit_detail_source_concept_id AS concept_id, 
+    discharged_to_concept_id,
+    preceding_visit_detail_id AS visit_detail_id,
+    parent_visit_detail_id AS visit_detail_id,
+    visit_occurrence_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
    description 'The visit_detail table captures detailed information about individual components of a healthcare visit, including specific encounters and services provided.',
   column_descriptions (
@@ -28,22 +40,22 @@ MODEL (
 );
 
 SELECT
-  vd.visit_detail_id::INT,
-  vd.person_id::INT,
-  vd.visit_detail_concept_id::INT,
+  vd.visit_detail_id::BIGINT,
+  vd.person_id::BIGINT,
+  vd.visit_detail_concept_id::BIGINT,
   vd.visit_detail_start_date::DATE,
   vd.visit_detail_start_datetime::TIMESTAMP,
   vd.visit_detail_end_date::DATE,
   vd.visit_detail_end_datetime::TIMESTAMP,
-  vd.visit_detail_type_concept_id::INT,
-  vd.provider_id::INT,
-  vd.care_site_id::INT,
+  vd.visit_detail_type_concept_id::BIGINT,
+  vd.provider_id::BIGINT,
+  vd.care_site_id::BIGINT,
   vd.visit_detail_source_value::TEXT,
-  vd.visit_detail_source_concept_id::INT,
+  vd.visit_detail_source_concept_id::BIGINT,
   vd.admitted_from_source_value::TEXT,
   vd.discharged_to_source_value::TEXT,
-  vd.discharged_to_concept_id::INT,
-  vd.preceding_visit_detail_id::INT,
-  vd.parent_visit_detail_id::INT,
-  vd.visit_occurrence_id::INT
+  vd.discharged_to_concept_id::BIGINT,
+  vd.preceding_visit_detail_id::BIGINT,
+  vd.parent_visit_detail_id::BIGINT,
+  vd.visit_occurrence_id::BIGINT
 FROM stg_gold.stg__visit_detail AS vd

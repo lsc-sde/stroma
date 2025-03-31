@@ -3,6 +3,17 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain payer_plan_period_id,
+  references (
+    person_id,
+    payer_concept_id AS concept_id, 
+    payer_source_concept_id AS concept_id,
+    plan_concept_id AS concept_id,
+    plan_source_concept_id AS concept_id,
+    sponsor_concept_id AS concept_id,
+    sponsor_source_concept_id AS concept_id,
+    stop_reason_concept_id AS concept_id,
+    stop_reason_source_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The payer_plan_period table captures details about the periods during which a person is covered by a specific payer and health plan.',
   column_descriptions (

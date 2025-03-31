@@ -3,6 +3,13 @@ MODEL (
   kind FULL,
   cron '@monthly',
   grain provider_id,
+  references (
+    specialty_concept_id AS concept_id,
+    care_site_id, 
+    gender_concept_id AS concept_id,
+    specialty_source_concept_id AS concept_id,
+    gender_source_concept_id AS concept_id
+    ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The provider table contains information about healthcare providers, including their identifiers, specialties, and affiliations.',
   column_descriptions (
