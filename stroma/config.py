@@ -100,7 +100,7 @@ if EnumGateway.PROD_DATABRICKS in enabled_gateways:
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
             state_connection=MSSQLConnectionConfig(                              
-                type="azurelsql",                                                   
+                type="mssql",                                                   
                 host=os.environ["AZURE_SQL_SERVER_STATE_HOST"],
                 port=os.environ["AZURE_SQL_SERVER_STATE_PORT"],
                 user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
