@@ -50,7 +50,7 @@ jobs:
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          pip install sqlmesh[databricks,postgres,github]==0.154.0
+          pip install sqlmesh[databricks,postgres,github]==0.170.0
           pip install python-dotenv
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
