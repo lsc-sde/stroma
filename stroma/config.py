@@ -37,7 +37,7 @@ class EnumGateway(str, Enum):
         DUCKDB (str): Represents the DuckDB gateway.
     """
 
-    PROD_DATABRICKS = "production_databricks"
+    PROD_DATABRICKS = "prod_databricks"
     MSSQL = "mssql"
     DUCKDB = "duckdb"
 
@@ -110,7 +110,7 @@ if EnumGateway.PROD_DATABRICKS in enabled_gateways:
             state_schema=state_schema
         )
 
-        gateways["production_databricks"] = production_gateway_databricks
+        gateways["prod_databricks"] = production_gateway_databricks
 
     except Exception as e:
         logging.error(
@@ -203,7 +203,7 @@ class OMOPSettings(BaseModel):
     @computed_field
     @property
     def catalog_src(self) -> str:
-        if default_gateway == EnumGateway.DATABRICKS:
+        if default_gateway == EnumGateway.PROD_DATABRICKS:
             return os.getenv("DATABRICKS_CATALOG_SOURCE")
         elif default_gateway == EnumGateway.MSSQL:
             return os.getenv("MSSQL_DATABASE_SOURCE")
