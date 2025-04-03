@@ -13,8 +13,8 @@ from sqlmesh.core.config import (
     PostgresConnectionConfig,
     DuckDBConnectionConfig,
     MSSQLConnectionConfig,
-    AzureSQLConnectionConfig,
 )
+# from sqlmesh.core.config import AzureSQLConnectionConfig
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.config.ui import UIConfig
 from sqlmesh.core.model import ModelKindName
