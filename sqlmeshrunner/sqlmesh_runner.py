@@ -22,7 +22,7 @@ os.environ['AZURE_SQL_STATE_DATABASE'] = dbutils.secrets.get(scope = "AzureKeyVa
 os.environ['ENABLED_GATEWAYS']="databricks"
 os.environ['DEFAULT_GATEWAY']='databricks'
 os.environ['STATE_SCHEMA']="stroma"
-os.environ['DATABRICKS_CATALOG']="rde_development"
+os.environ['DATABRICKS_CATALOG']="rde_production"
 os.environ['DATABRICKS_CATALOG_SOURCE']="dbw-lsc-uks-dataprd-dlz-01"
 os.environ['DATABRICKS_SCHEMA_BASE']="lth_omop"
 os.environ['DATABRICKS_SCHEMA_VOCAB']="lth_omop"
