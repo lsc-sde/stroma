@@ -30,11 +30,11 @@ jobs:
       DATABRICKS_CATALOG_SOURCE:  ${{ secrets.DATABRICKS_CATALOG_SOURCE }}
       DATABRICKS_SCHEMA_BASE: ${{ secrets.DATABRICKS_SCHEMA }}
       DATABRICKS_SCHEMA_VOCAB: ${{ secrets.DATABRICKS_SCHEMA }}
-      DATABRICKS_STATE_DB_HOST: ${{ secrets.DATABRICKS_STATE_DB_HOST }}
-      DATABRICKS_STATE_DB_PORT: ${{ secrets.DATABRICKS_STATE_DB_PORT }}
-      DATABRICKS_STATE_DB_DATABASE: ${{ secrets.DATABRICKS_STATE_DB_DATABASE }}
-      DATABRICKS_STATE_DB_USER: ${{ secrets.DATABRICKS_STATE_DB_USER }}
-      DATABRICKS_STATE_DB_PASSWORD: ${{ secrets.DATABRICKS_STATE_DB_PASSWORD }}
+      AZURE_SQL_SERVER_STATE_HOST: ${{ secrets.AZURE_SQL_SERVER_STATE_HOST }}
+      AZURE_SQL_SERVER_STATE_PORT: ${{ secrets.AZURE_SQL_SERVER_STATE_PORT }}
+      AZURE_SQL_STATE_DATABASE: ${{ secrets.AZURE_SQL_STATE_DATABASE }}
+      AZURE_SQL_SERVER_STATE_USER: ${{ secrets.AZURE_SQL_SERVER_STATE_USER }}
+      AZURE_SQL_SERVER_STATE_PASSWORD: ${{ secrets.AZURE_SQL_SERVER_STATE_PASSWORD }}
 
     steps:
       # Checkout the repository code
@@ -50,7 +50,7 @@ jobs:
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          pip install sqlmesh[databricks,postgres,github]==0.170.0
+          pip install sqlmesh[databricks,postgres,github,azuresql,mssql]==0.170.0
           pip install python-dotenv
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment

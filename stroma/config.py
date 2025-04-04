@@ -99,14 +99,14 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 concurrent_tasks=os.getenv("DATABRICKS_CONCURRENT_TASKS", default=4),
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
-            state_connection=PostgresConnectionConfig(
-                host=os.environ["DATABRICKS_STATE_DB_HOST"],
-                port=os.environ["DATABRICKS_STATE_DB_PORT"],
-                user=os.environ["DATABRICKS_STATE_DB_USER"],
-                password=os.environ["DATABRICKS_STATE_DB_PASSWORD"],
-                database=os.environ["DATABRICKS_STATE_DB_DATABASE"],
+            state_connection=MSSQLConnectionConfig(
+                host=os.environ["AZURE_SQL_SERVER_STATE_HOST"],
+                port=os.environ["AZURE_SQL_SERVER_STATE_PORT"],
+                user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
+                password=os.environ["AZURE_SQL_SERVER_STATE_PASSWORD"],
+                database=os.environ["AZURE_SQL_STATE_DATABASE"]
             ),
-            state_schema=state_schema,
+            state_schema=state_schema
         )
 
         gateways["databricks"] = gateway_databricks
