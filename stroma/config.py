@@ -32,12 +32,12 @@ class EnumGateway(str, Enum):
     Enumeration class representing the default gateway options.
 
     Attributes:
-        PROD_DATABRICKS (str): Represents the Production Databricks gateway.
+        DATABRICKS (str): Represents the Databricks gateway.
         MSSQL (str): Represents the MSSQL gateway.
         DUCKDB (str): Represents the DuckDB gateway.
     """
 
-    PROD_DATABRICKS = "prod_databricks"
+    DATABRICKS = "databricks"
     MSSQL = "mssql"
     DUCKDB = "duckdb"
 
@@ -89,9 +89,9 @@ if EnumGateway.DUCKDB in enabled_gateways:
         )
 
 # Databricks
-if EnumGateway.PROD_DATABRICKS in enabled_gateways:
+if EnumGateway.DATABRICKS in enabled_gateways:
     try:
-        production_gateway_databricks = GatewayConfig(
+        gateway_databricks = GatewayConfig(
             connection=DatabricksConnectionConfig(
                 server_hostname=os.environ["DATABRICKS_SERVER_HOSTNAME"],
                 http_path=os.environ["DATABRICKS_HTTP_PATH"],
@@ -109,11 +109,11 @@ if EnumGateway.PROD_DATABRICKS in enabled_gateways:
             state_schema=state_schema
         )
 
-        gateways["prod_databricks"] = production_gateway_databricks
+        gateways["databricks"] = gateway_databricks
 
     except Exception as e:
         logging.error(
-            f"Error setting up Production Databricks gateway. Ensure all environment variables are set correctly. {e}"
+            f"Error setting up Databricks gateway. Ensure all environment variables are set correctly. {e}"
         )
 
 
@@ -202,7 +202,7 @@ class OMOPSettings(BaseModel):
     @computed_field
     @property
     def catalog_src(self) -> str:
-        if default_gateway == EnumGateway.PROD_DATABRICKS:
+        if default_gateway == EnumGateway.DATABRICKS:
             return os.getenv("DATABRICKS_CATALOG_SOURCE")
         elif default_gateway == EnumGateway.MSSQL:
             return os.getenv("MSSQL_DATABASE_SOURCE")
