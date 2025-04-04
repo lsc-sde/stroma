@@ -20,8 +20,8 @@ jobs:
       pull-requests: write
     environment: ${{ inputs.environment}}
     env:
-      DEFAULT_GATEWAY: "prod_databricks"
-      ENABLED_GATEWAYS: "prod_databricks"
+      DEFAULT_GATEWAY: "databricks"
+      ENABLED_GATEWAYS: "databricks"
       STATE_SCHEMA: "stroma"
       DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
       DATABRICKS_SERVER_HOSTNAME:  ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
