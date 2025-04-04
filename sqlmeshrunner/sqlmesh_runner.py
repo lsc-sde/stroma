@@ -19,8 +19,8 @@ os.environ['AZURE_SQL_STATE_DATABASE'] = dbutils.secrets.get(scope = "AzureKeyVa
 
 # COMMAND ----------
 # DBTITLE 1,Set Environment Variables
-os.environ['ENABLED_GATEWAYS']="prod_databricks"
-os.environ['DEFAULT_GATEWAY']='prod_databricks'
+os.environ['ENABLED_GATEWAYS']="databricks"
+os.environ['DEFAULT_GATEWAY']='databricks'
 os.environ['STATE_SCHEMA']="stroma"
 os.environ['DATABRICKS_CATALOG']="rde_production"
 os.environ['DATABRICKS_CATALOG_SOURCE']="dbw-lsc-uks-dataprd-dlz-01"
