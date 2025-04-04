@@ -12,7 +12,7 @@ from sqlmesh.core.config import (
     DatabricksConnectionConfig,
     PostgresConnectionConfig,
     DuckDBConnectionConfig,
-    MSSQLConnectionConfig
+    MSSQLConnectionConfig,
 )
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.config.ui import UIConfig
@@ -105,7 +105,6 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
                 password=os.environ["AZURE_SQL_SERVER_STATE_PASSWORD"],
                 database=os.environ["AZURE_SQL_STATE_DATABASE"]
-              )
             ),
             state_schema=state_schema
         )
