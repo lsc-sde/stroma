@@ -7,6 +7,7 @@ MODEL (
     (schema_achilles := silver_achilles, src_schema := silver, @temp_schema := z_tmp_silver_achilles),
     (schema_achilles := gold_achilles,  src_schema := gold, @temp_schema := z_tmp_gold_achilles)
 )
+, dialect 'databricks'
 );
 
 -- 117	Number of persons with at least one day of observation in each month
@@ -37,10 +38,10 @@ left join
     where
       year(op2.observation_period_start_date) * 100
       + month(op2.observation_period_start_date)
-      <= t2.obs_month
+      <= t2.obs_month::INT
       and year(op2.observation_period_end_date) * 100
       + month(op2.observation_period_end_date)
-      >= t2.obs_month
+      >= t2.obs_month::INT
   ) as op1 on t1.obs_month = op1.obs_month
 group by t1.obs_month
 having coalesce(count(distinct op1.PERSON_ID), 0) > 0

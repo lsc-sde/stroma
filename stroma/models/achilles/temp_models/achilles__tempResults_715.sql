@@ -7,6 +7,7 @@ MODEL (
     (schema_achilles := silver_achilles, src_schema := silver, @temp_schema := z_tmp_silver_achilles),
     (schema_achilles := gold_achilles,  src_schema := gold, @temp_schema := z_tmp_gold_achilles)
 )
+, dialect 'databricks'
 );
 
 -- 715	Distribution of days_supply by drug_concept_id

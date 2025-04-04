@@ -1,6 +1,6 @@
 /* Code taken from: */ /* https://github.com/OHDSI/ETL-CMS/blob/master/SQL/create_CDMv5_drug_era_non_stockpile.sql */
 MODEL (
-  name silver.drug_era,
+  name gold.drug_era,
   kind FULL,
   cron '@monthly',
   grain drug_era_id,

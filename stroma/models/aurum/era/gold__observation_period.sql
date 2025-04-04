@@ -8,8 +8,8 @@ MODEL (
 
 SELECT
   row_number() OVER (ORDER BY person_id) AS observation_period_id,
-  person_id,
-  observation_period_start_date,
-  observation_period_end_date,
+  person_id::BIGINT,
+  observation_period_start_date::DATE,
+  observation_period_end_date::DATE,
   32817 AS period_type_concept_id
 FROM stg_gold.stg__observation_period

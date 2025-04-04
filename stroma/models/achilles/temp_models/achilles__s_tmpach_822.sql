@@ -7,6 +7,7 @@ MODEL (
     (schema_achilles := silver_achilles, src_schema := silver, @temp_schema := z_tmp_silver_achilles),
     (schema_achilles := gold_achilles,  src_schema := gold, @temp_schema := z_tmp_gold_achilles)
 )
+, dialect 'databricks'
 );
 
 -- 822	Number of observation records, by observation_concept_id and value_as_concept_id, observation_concept_id

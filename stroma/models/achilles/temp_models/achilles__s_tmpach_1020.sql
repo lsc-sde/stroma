@@ -7,6 +7,7 @@ MODEL (
     (schema_achilles := silver_achilles, src_schema := silver, @temp_schema := z_tmp_silver_achilles),
     (schema_achilles := gold_achilles,  src_schema := gold, @temp_schema := z_tmp_gold_achilles)
 )
+, dialect 'databricks'
 );
 
 -- 1020	Number of condition era records by condition era start month
