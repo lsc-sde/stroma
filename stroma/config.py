@@ -14,6 +14,7 @@ from sqlmesh.core.config import (
     DuckDBConnectionConfig,
     MSSQLConnectionConfig,
 )
+from sqlmesh.core.config.connection import AzureSQLConnectionConfig
 from sqlmesh.core.config.format import FormatConfig
 from sqlmesh.core.config.ui import UIConfig
 from sqlmesh.core.model import ModelKindName
@@ -99,7 +100,7 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 concurrent_tasks=os.getenv("DATABRICKS_CONCURRENT_TASKS", default=4),
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
-            state_connection=MSSQLConnectionConfig(
+            state_connection=AzureSQLConnectionConfig(
                 host=os.environ["AZURE_SQL_SERVER_STATE_HOST"],
                 port=os.environ["AZURE_SQL_SERVER_STATE_PORT"],
                 user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
