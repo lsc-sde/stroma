@@ -25,7 +25,7 @@ from typing import Dict, Any, Optional
 load_dotenv(find_dotenv(), override=True)
 
 ###############################################################################
-# SQLMESH CONFIGURATION   
+# SQLMESH CONFIGURATION    
 ###############################################################################
 
 class EnumGateway(str, Enum):
