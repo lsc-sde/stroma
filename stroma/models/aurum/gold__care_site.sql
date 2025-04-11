@@ -23,3 +23,4 @@ SELECT
   cs.care_site_source_value::TEXT,
   cs.place_of_service_source_value::TEXT
 FROM silver.care_site AS cs
+
