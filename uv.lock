@@ -2175,7 +2175,7 @@ dependencies = [
 
 [package.optional-dependencies]
 databricks = [
-    { name = "sqlmesh", extra = ["azuresql", "databricks", "mssql"] },
+    { name = "sqlmesh", extra = ["azuresql", "databricks"] },
 ]
 mssql = [
     { name = "sqlmesh", extra = ["mssql"] },
@@ -2194,9 +2194,9 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "python-dotenv" },
-    { name = "sqlmesh", extras = ["azuresql", "databricks", "mssql"], marker = "extra == 'databricks'", specifier = ">=0.170.1" },
+    { name = "sqlmesh", extras = ["azuresql", "databricks"], marker = "extra == 'databricks'", specifier = "~=0.170" },
     { name = "sqlmesh", extras = ["github", "web"], specifier = "~=0.170" },
-    { name = "sqlmesh", extras = ["mssql"], marker = "extra == 'mssql'" },
+    { name = "sqlmesh", extras = ["mssql"], marker = "extra == 'mssql'", specifier = "~=0.170" },
 ]
 provides-extras = ["databricks", "mssql"]
 
