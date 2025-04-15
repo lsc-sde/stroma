@@ -41,19 +41,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: 3.12
+          version: "0.5.16"
 
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          pip install sqlmesh[databricks,postgres,github,azuresql,mssql]==0.170.0
-          pip install python-dotenv
+          uv sync
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
         run: |
-          sqlmesh_cicd -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }} run-all
+          uv run sqlmesh_cicd -p ${{ github.workspace }}/stroma/ github --token ${{ secrets.GITHUB_TOKEN }} run-all
