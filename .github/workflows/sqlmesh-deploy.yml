@@ -49,7 +49,7 @@ jobs:
       # Install SQLMesh
       - name: Install SQLMesh
         run: |
-          uv sync --extras databricks
+          uv sync --extra databricks
 
       # Run `sqlmesh plan` and `sqlmesh apply` for the environment
       - name: Run SQLMesh Plan & Apply
