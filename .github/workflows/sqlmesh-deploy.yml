@@ -44,7 +44,7 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
         with:
-          version: "0.5.16"
+          version: "0.6.5"
 
       # Install SQLMesh
       - name: Install SQLMesh
