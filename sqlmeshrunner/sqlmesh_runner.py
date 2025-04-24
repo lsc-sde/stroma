@@ -4,6 +4,7 @@ import sqlmesh
 import os
 
 # COMMAND ----------
+
 # DBTITLE 1,Get Secrets
 os.environ['DATABRICKS_SERVER_HOSTNAME'] = dbutils.secrets.get(scope = "AzureKeyVaultSecrets", key = "UrlTo-DatabricksWorkspace")
 os.environ['DATABRICKS_HTTP_PATH'] = dbutils.secrets.get(scope = "AzureKeyVaultSecrets", key = "SqlEndpointTo-DatabricksWorkspace")
@@ -14,6 +15,7 @@ os.environ['AZURE_SQL_SERVER_STATE_PASSWORD'] = dbutils.secrets.get(scope = "Azu
 os.environ['AZURE_SQL_STATE_DATABASE'] = dbutils.secrets.get(scope = "AzureKeyVaultSecrets", key = "DatabaseTo-AzureSqlDbStateDatabase")
 
 # COMMAND ----------
+
 # DBTITLE 1,Set Environment Variables
 os.environ['ENABLED_GATEWAYS']="databricks"
 os.environ['DEFAULT_GATEWAY']='databricks'
@@ -28,9 +30,13 @@ os.environ['AZURE_SQL_SERVER_STATE_PORT']='1433'
 print('Environment variables set.')
 
 # COMMAND ----------
+
 # DBTITLE 1,Set Context
-# MAGIC %context ../stroma/
+# MAGIC %context ../stroma/  --ignore-warnings
 
 # COMMAND ----------
+
 # DBTITLE 1,Run Plan
-# MAGIC %plan prod
+# MAGIC %plan prod --run
+# MAGIC
+# MAGIC # For further configuration of plan see https://sqlmesh.readthedocs.io/en/stable/reference/notebook/#plan
