@@ -1,6 +1,6 @@
 MODEL (
   name silver.condition_era,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain condition_era_id
 );

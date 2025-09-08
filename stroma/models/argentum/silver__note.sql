@@ -1,6 +1,6 @@
 MODEL (
   name silver.note,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain note_id,
   references (

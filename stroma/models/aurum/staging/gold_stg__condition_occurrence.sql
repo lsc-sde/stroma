@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__condition_occurrence,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

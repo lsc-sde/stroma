@@ -1,6 +1,6 @@
 MODEL (
   name gold.condition_occurrence,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain condition_occurrence_id,
   references (

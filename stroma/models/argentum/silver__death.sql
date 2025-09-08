@@ -1,6 +1,6 @@
 MODEL (
   name silver.death,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain person_id,
   references (

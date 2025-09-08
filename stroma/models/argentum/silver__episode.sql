@@ -1,6 +1,6 @@
 MODEL (
   name silver.episode,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain episode_id,
   references (

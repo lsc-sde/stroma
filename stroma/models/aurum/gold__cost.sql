@@ -1,6 +1,6 @@
 MODEL (
   name gold.cost,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain cost_id,
   references (

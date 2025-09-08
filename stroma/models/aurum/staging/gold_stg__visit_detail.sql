@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__visit_detail,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

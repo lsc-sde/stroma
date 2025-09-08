@@ -1,6 +1,6 @@
 MODEL (
   name silver.device_exposure,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain device_exposure_id,
   references (

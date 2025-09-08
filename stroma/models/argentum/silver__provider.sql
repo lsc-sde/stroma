@@ -1,6 +1,6 @@
 MODEL (
   name silver.provider,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain provider_id,
   references (

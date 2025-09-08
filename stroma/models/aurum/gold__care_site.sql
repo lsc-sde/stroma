@@ -1,6 +1,6 @@
 MODEL (
   name gold.care_site,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain care_site_id,
   references (location_id, place_of_service_concept_id AS concept_id),

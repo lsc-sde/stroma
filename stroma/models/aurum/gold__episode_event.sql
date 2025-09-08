@@ -1,6 +1,6 @@
 MODEL (
   name gold.episode_event,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   references (episode_id, episode_event_field_concept_id AS concept_id),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),

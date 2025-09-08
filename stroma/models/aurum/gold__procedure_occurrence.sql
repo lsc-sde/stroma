@@ -1,6 +1,6 @@
 MODEL (
   name gold.procedure_occurrence,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain procedure_occurrence_id,
   references (

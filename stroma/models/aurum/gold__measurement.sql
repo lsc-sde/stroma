@@ -1,6 +1,6 @@
 MODEL (
   name gold.measurement,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain measurement_id,
   references (

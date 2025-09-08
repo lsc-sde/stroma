@@ -1,6 +1,6 @@
 MODEL (
   name silver.location,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain location_id,
   references (

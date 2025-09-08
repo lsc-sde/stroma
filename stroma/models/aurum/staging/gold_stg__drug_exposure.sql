@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__drug_exposure,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

@@ -1,6 +1,6 @@
 MODEL (
   name silver.note_nlp,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain note_nlp_id,
   references (

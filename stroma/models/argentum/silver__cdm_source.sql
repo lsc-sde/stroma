@@ -1,6 +1,6 @@
 MODEL (
   name silver.cdm_source,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

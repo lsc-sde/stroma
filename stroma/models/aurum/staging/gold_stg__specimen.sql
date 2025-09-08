@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__specimen,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

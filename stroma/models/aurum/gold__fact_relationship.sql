@@ -1,6 +1,6 @@
 MODEL (
   name gold.fact_relationship,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   references (
     domain_concept_id_1 AS concept_id,

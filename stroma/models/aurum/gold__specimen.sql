@@ -1,6 +1,6 @@
 MODEL (
   name gold.specimen,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain specimen_id,
   references (

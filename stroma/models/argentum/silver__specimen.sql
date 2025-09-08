@@ -1,6 +1,6 @@
 MODEL (
   name silver.specimen,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain specimen_id,
   references (

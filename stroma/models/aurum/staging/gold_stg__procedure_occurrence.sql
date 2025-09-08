@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__procedure_occurrence,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

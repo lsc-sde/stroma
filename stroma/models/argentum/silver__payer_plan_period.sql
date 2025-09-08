@@ -1,6 +1,6 @@
 MODEL (
   name silver.payer_plan_period,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain payer_plan_period_id,
   references (

@@ -1,6 +1,6 @@
 MODEL (
   name silver.observation_period,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain observation_period_id,
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb')

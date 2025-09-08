@@ -1,6 +1,6 @@
 MODEL (
   name gold.drug_exposure,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   grain drug_exposure_id,
   references (

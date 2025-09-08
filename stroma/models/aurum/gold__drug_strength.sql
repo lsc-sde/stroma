@@ -1,6 +1,6 @@
 MODEL (
   name gold.drug_strength,
-  kind FULL,
+  kind VIEW,
   cron '@monthly',
   references (
     person_id,

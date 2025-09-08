@@ -1,6 +1,6 @@
 MODEL (
   name stg_silver.stg__observation_period,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 

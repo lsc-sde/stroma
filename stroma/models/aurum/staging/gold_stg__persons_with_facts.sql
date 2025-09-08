@@ -1,6 +1,6 @@
 MODEL (
   name stg_gold.stg__persons_with_facts,
-  kind FULL,
+  kind VIEW,
   cron '@monthly'
 );
 
