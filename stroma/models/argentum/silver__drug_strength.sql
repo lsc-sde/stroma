@@ -9,9 +9,9 @@ MODEL (
     amount_unit_concept_id AS concept_id,
     numerator_unit_concept_id AS concept_id,
     denominator_unit_concept_id AS concept_id
-    ),
-  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'), 
-  description 'The drug_strength table stores data on the strength and concentration of drug ingredients, including measurement units and validity periods.', 
+  ),
+  physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
+  description 'The drug_strength table stores data on the strength and concentration of drug ingredients, including measurement units and validity periods.',
   column_descriptions (
     drug_concept_id = 'Identifier for the drug concept',
     ingredient_concept_id = 'Identifier for the ingredient concept',
@@ -26,7 +26,7 @@ MODEL (
     valid_end_date = 'End date of the validity period',
     invalid_reason = 'Reason for invalidation'
   )
-        );
+);
 
 SELECT
   ds.drug_concept_id::INT,

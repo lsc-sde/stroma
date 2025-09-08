@@ -16,7 +16,7 @@ MODEL (
     measurement_source_concept_id AS concept_id,
     unit_source_concept_id AS concept_id,
     meas_event_field_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing clinical measurements and observations for persons in the OMOP CDM',
   column_descriptions (

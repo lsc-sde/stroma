@@ -5,7 +5,7 @@ MODEL (
   grain person_id,
   references (
     gender_concept_id AS concept_id,
-    race_concept_id AS concept_id, 
+    race_concept_id AS concept_id,
     ethnicity_concept_id AS concept_id,
     location_id,
     provider_id,
@@ -13,7 +13,7 @@ MODEL (
     gender_source_concept_id AS concept_id,
     race_source_concept_id AS concept_id,
     ethnicity_source_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The person table contains demographic details about each individual in the database, serving as the central entity for all clinical data.',
   column_descriptions (
@@ -42,8 +42,8 @@ MODEL (
 SELECT
   p.person_id::BIGINT,
   p.gender_concept_id::BIGINT,
-  YEAR(p.birth_datetime)::BIGINT as year_of_birth, /* This is the year the patient was born */
-  MONTH(p.birth_datetime)::BIGINT as month_of_birth,
+  year(p.birth_datetime)::BIGINT AS year_of_birth, /* This is the year the patient was born */
+  month(p.birth_datetime)::BIGINT AS month_of_birth,
   p.day_of_birth::BIGINT,
   p.birth_datetime::TIMESTAMP,
   p.race_concept_id::BIGINT,

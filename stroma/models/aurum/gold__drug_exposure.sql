@@ -12,7 +12,7 @@ MODEL (
     visit_occurrence_id,
     visit_detail_id,
     drug_source_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Records details of drugs a patient has been exposed to, including prescriptions and administrations.',
   column_descriptions (

@@ -30,7 +30,11 @@ WITH cteconditiontarget /* Depending on the needs of your data, you can put more
       condition_concept_id,
       event_date,
       event_type,
-      max(start_ordinal) OVER (PARTITION BY person_id, condition_concept_id ORDER BY event_date, event_type rows BETWEEN UNBOUNDED preceding AND CURRENT ROW) AS start_ordinal, /* this pulls the current START down from the prior rows so that the NULLs from the END DATES will contain a value we can compare with */
+      max(start_ordinal) OVER (
+        PARTITION BY person_id, condition_concept_id
+        ORDER BY event_date, event_type
+        rows BETWEEN UNBOUNDED preceding AND CURRENT ROW
+      ) AS start_ordinal, /* this pulls the current START down from the prior rows so that the NULLs from the END DATES will contain a value we can compare with */
       row_number() OVER (PARTITION BY person_id, condition_concept_id ORDER BY event_date, event_type) AS overall_ord /* this re-numbers the inner UNION so all rows are numbered ordered by the event date */
     FROM (
       /* select the start dates, assigning a row number to each */

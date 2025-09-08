@@ -1,8 +1,8 @@
 import os
 from dotenv import find_dotenv, load_dotenv
- 
+
 import logging
-from pathlib import Path   
+from pathlib import Path
 from sqlmesh.core.config import Config, AutoCategorizationMode, CategorizerConfig
 from sqlmesh.integrations.github.cicd.config import GithubCICDBotConfig, MergeMethod
 
@@ -10,7 +10,6 @@ from sqlmesh.core.config import (
     ModelDefaultsConfig,
     GatewayConfig,
     DatabricksConnectionConfig,
-    PostgresConnectionConfig,
     DuckDBConnectionConfig,
     MSSQLConnectionConfig,
 )
@@ -25,8 +24,9 @@ from typing import Dict, Any, Optional
 load_dotenv(find_dotenv(), override=True)
 
 ###############################################################################
-# SQLMESH CONFIGURATION   
+# SQLMESH CONFIGURATION
 ###############################################################################
+
 
 class EnumGateway(str, Enum):
     """
@@ -61,9 +61,7 @@ gateways = {}
 # For each gateway, first check if it is enabled.
 # This avoids reading in env variables that may not exist or looking for libraries that are not installed
 
-enabled_gateways = [
-    i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS").split(",")
-]
+enabled_gateways = [i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS").split(",")]
 
 # Make sure default gateway is in enabled
 assert default_gateway in enabled_gateways, AssertionError(
@@ -80,7 +78,7 @@ if EnumGateway.DUCKDB in enabled_gateways:
             connection=DuckDBConnectionConfig(database=database),
             state_connection=DuckDBConnectionConfig(database=state_database),
             state_schema=state_schema,
-        )   
+        )
 
         gateways["duckdb"] = gateway_duckdb
 
@@ -101,13 +99,13 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
             state_connection=AzureSQLConnectionConfig(
-                host=os.environ["AZURE_SQL_SERVER_STATE_HOST"],
-                port=os.environ["AZURE_SQL_SERVER_STATE_PORT"],
-                user=os.environ["AZURE_SQL_SERVER_STATE_USER"],
-                password=os.environ["AZURE_SQL_SERVER_STATE_PASSWORD"],
-                database=os.environ["AZURE_SQL_STATE_DATABASE"]
+                host=os.environ["DATABRICKS_STATE_DB_HOST"],
+                port=os.environ["DATABRICKS_STATE_DB_PORT"],
+                user=os.environ["DATABRICKS_STATE_DB_USER"],
+                password=os.environ["DATABRICKS_STATE_DB_PASSWORD"],
+                database=os.environ["DATABRICKS_STATE_DB_DATABASE"],
             ),
-            state_schema=state_schema
+            state_schema=state_schema,
         )
 
         gateways["databricks"] = gateway_databricks
@@ -134,14 +132,14 @@ if EnumGateway.MSSQL in enabled_gateways:
             state_schema=state_schema,
         )
 
-        gateways["mssql"] = gateway_mssql   
+        gateways["mssql"] = gateway_mssql
     except Exception as e:
         logging.error(
             f"Error setting up MS SQL Server gateway. Ensure all environment variables are set correctly. {e}"
         )
 
 
-class SQLMeshSettings(BaseModel):   
+class SQLMeshSettings(BaseModel):
     """
     SQLMeshSettings class represents the settings for SQLMesh.
 
@@ -153,7 +151,7 @@ class SQLMeshSettings(BaseModel):
         variables (dict): A dictionary of variables.
         format (FormatConfig): The configuration for formatting.
     """
- 
+
     model_config = ConfigDict(protected_namespaces=())
 
     project: str
@@ -211,7 +209,7 @@ class OMOPSettings(BaseModel):
             return Path(os.getenv("DUCKDB_DATABASE")).stem
 
 
-variables = OMOPSettings().model_dump(mode="json") 
+variables = OMOPSettings().model_dump(mode="json")
 
 
 variables.update(
@@ -221,23 +219,23 @@ variables.update(
     }
 )
 
-cicd_variables=GithubCICDBotConfig(
-        invalidate_environment_after_deploy=False,
-        enable_deploy_command=True,
-        merge_method=MergeMethod.SQUASH,
-        command_namespace="#SQLMesh",
-        auto_categorize_changes=CategorizerConfig(
-            external=AutoCategorizationMode.FULL,
-            python=AutoCategorizationMode.FULL,
-            sql=AutoCategorizationMode.FULL,
-            seed=AutoCategorizationMode.FULL,
-        ),
-        default_pr_start="1 year ago",
-        skip_pr_backfill=False,
-        run_on_deploy_to_prod=False,
+cicd_variables = GithubCICDBotConfig(
+    invalidate_environment_after_deploy=False,
+    enable_deploy_command=True,
+    merge_method=MergeMethod.SQUASH,
+    command_namespace="#SQLMesh",
+    auto_categorize_changes=CategorizerConfig(
+        external=AutoCategorizationMode.FULL,
+        python=AutoCategorizationMode.FULL,
+        sql=AutoCategorizationMode.FULL,
+        seed=AutoCategorizationMode.FULL,
+    ),
+    default_pr_start="1 year ago",
+    skip_pr_backfill=False,
+    run_on_deploy_to_prod=False,
 )
 
-config = Config(**dict(SQLMeshSettings(project="stroma", variables=variables)), cicd_bot=cicd_variables)
-
-
-
+config = Config(
+    **dict(SQLMeshSettings(project="stroma", variables=variables)),
+    cicd_bot=cicd_variables,
+)

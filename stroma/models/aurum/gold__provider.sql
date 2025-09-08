@@ -5,11 +5,11 @@ MODEL (
   grain provider_id,
   references (
     specialty_concept_id AS concept_id,
-    care_site_id, 
+    care_site_id,
     gender_concept_id AS concept_id,
     specialty_source_concept_id AS concept_id,
     gender_source_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The provider table contains information about healthcare providers, including their identifiers, specialties, and affiliations.',
   column_descriptions (
@@ -25,7 +25,7 @@ MODEL (
     specialty_source_value = 'Source value representing the provider specialty',
     specialty_source_concept_id = 'Source concept ID for the provider specialty',
     gender_source_value = 'Source value representing the provider gender',
-    gender_source_concept_id = 'Source concept ID for the provider gender'    
+    gender_source_concept_id = 'Source concept ID for the provider gender'
   )
 );
 

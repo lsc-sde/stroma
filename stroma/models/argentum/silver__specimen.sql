@@ -6,11 +6,11 @@ MODEL (
   references (
     person_id,
     specimen_concept_id AS concept_id,
-    specimen_type_concept_id AS concept_id, 
+    specimen_type_concept_id AS concept_id,
     unit_concept_id AS concept_id,
     anatomic_site_concept_id AS concept_id,
     disease_status_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'The specimen table contains details about biological specimens collected from patients, including type, collection date, and source.',
   column_descriptions (
@@ -28,7 +28,7 @@ MODEL (
     specimen_source_value = 'Source value representing the specimen',
     unit_source_value = 'Source value for the unit of measurement',
     anatomic_site_source_value = 'Source value for the anatomical site of specimen collection',
-    disease_status_source_value = 'Source value for the disease status of the specimen'  
+    disease_status_source_value = 'Source value for the disease status of the specimen'
   )
 );
 

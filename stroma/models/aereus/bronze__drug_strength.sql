@@ -3,7 +3,7 @@ MODEL (
   kind FULL,
   cron '@monthly',
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
-  description 'The drug_strength table stores data on the strength and concentration of drug ingredients, including measurement units and validity periods.', 
+  description 'The drug_strength table stores data on the strength and concentration of drug ingredients, including measurement units and validity periods.',
   column_descriptions (
     drug_concept_id = 'Identifier for the drug concept',
     ingredient_concept_id = 'Identifier for the ingredient concept',

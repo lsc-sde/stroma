@@ -9,11 +9,10 @@ MODEL (
     episode_object_concept_id AS concept_id,
     episode_type_concept_id AS concept_id,
     episode_source_concept_id AS concept_id
-    ),
+  ),
   physical_properties ('delta.tuneFileSizesForRewrites' = FALSE, 'delta.targetFileSize' = '256mb'),
   description 'Table containing information about episodes of care in the OMOP CDM',
-  column_descriptions 
-  (
+  column_descriptions (
     episode_id = 'Unique identifier for each episode',
     person_id = 'Unique identifier for each person',
     episode_concept_id = 'Concept ID representing the type of episode',
