@@ -42,9 +42,9 @@ MODEL (
 SELECT
   p.person_id::BIGINT,
   p.gender_concept_id::BIGINT,
-  year(p.birth_datetime)::BIGINT AS year_of_birth, /* This is the year the patient was born */
-  month(p.birth_datetime)::BIGINT AS month_of_birth,
-  p.day_of_birth::BIGINT,
+  year(p.birth_datetime)::INT AS year_of_birth, /* This is the year the patient was born */
+  month(p.birth_datetime)::INT AS month_of_birth,
+  p.day_of_birth::INT,
   p.birth_datetime::TIMESTAMP,
   p.race_concept_id::BIGINT,
   p.ethnicity_concept_id::BIGINT,

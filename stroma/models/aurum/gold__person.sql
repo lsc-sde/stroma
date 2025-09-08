@@ -42,8 +42,10 @@ MODEL (
 SELECT
   p.person_id::BIGINT,
   p.gender_concept_id::BIGINT,
-  p.year_of_birth::BIGINT, /* This is the year the patient was born */
-  p.month_of_birth::BIGINT,
+  p.year_of_birth::INT, /* This is the year the patient was born */
+  p.month_of_birth::INT,
+  p.day_of_birth::INT,
+  p.birth_datetime::TIMESTAMP,
   p.race_concept_id::BIGINT,
   p.ethnicity_concept_id::BIGINT,
   p.location_id::BIGINT,

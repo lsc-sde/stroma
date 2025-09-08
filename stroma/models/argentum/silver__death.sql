@@ -27,7 +27,7 @@ SELECT
   d.death_date::DATE,
   d.death_datetime::TIMESTAMP,
   d.death_type_concept_id::BIGINT,
-  d.cause_concept_id,
-  d.cause_source_value,
-  d.cause_source_concept_id
+  d.cause_concept_id::BIGINT,
+  d.cause_source_value::TEXT,
+  d.cause_source_concept_id::BIGINT
 FROM bronze.death AS d

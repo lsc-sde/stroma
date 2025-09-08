@@ -38,21 +38,21 @@ MODEL (
 );
 
 SELECT
-  vo.visit_occurrence_id::INT,
-  vo.person_id::INT,
-  vo.visit_concept_id::INT,
+  vo.visit_occurrence_id::BIGINT,
+  vo.person_id::BIGINT,
+  vo.visit_concept_id::BIGINT,
   vo.visit_start_date::DATE,
   vo.visit_start_datetime::TIMESTAMP,
   vo.visit_end_date::DATE,
   vo.visit_end_datetime::TIMESTAMP,
-  vo.visit_type_concept_id::INT,
-  vo.provider_id::INT,
-  vo.care_site_id::INT,
+  vo.visit_type_concept_id::BIGINT,
+  vo.provider_id::BIGINT,
+  vo.care_site_id::BIGINT,
   vo.visit_source_value::TEXT,
-  vo.visit_source_concept_id::INT,
-  vo.admitted_from_concept_id::INT,
+  vo.visit_source_concept_id::BIGINT,
+  vo.admitted_from_concept_id::BIGINT,
   vo.admitted_from_source_value::TEXT,
-  vo.discharged_to_concept_id::INT,
+  vo.discharged_to_concept_id::BIGINT,
   vo.discharged_to_source_value::TEXT,
-  vo.preceding_visit_occurrence_id::INT
+  vo.preceding_visit_occurrence_id::BIGINT
 FROM bronze.visit_occurrence AS vo
