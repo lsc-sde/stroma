@@ -1,5 +1,11 @@
 MODEL (
   name silver.person,
+  
+AUDIT (
+    name person_id,
+    blocking FALSE
+),
+
   kind VIEW,
   cron '@monthly',
   grain person_id,
