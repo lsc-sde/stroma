@@ -41,10 +41,14 @@ MODEL (
     dose_unit_source_value = 'The source code for the unit of measure for the dose as it appears in the source data.'
   ),
   audits (
-    not_null(columns := (person_id, drug_exposure_id, drug_concept_id, drug_exposure_start_date)),
-    unique_values(columns := (drug_exposure_id)),
-    event_not_in_future(column := drug_exposure_start_date),
-    event_not_in_future(column := drug_exposure_end_date)
+    not_null(
+      columns := (person_id, drug_exposure_id, drug_concept_id, drug_exposure_start_date)
+    ),
+    unique_values(columns := (
+      drug_exposure_id
+    )),
+    event_not_in_future("column" := drug_exposure_start_date),
+    event_not_in_future("column" := drug_exposure_end_date)
   )
 );
 
@@ -73,9 +77,10 @@ SELECT
   de.route_source_value::TEXT,
   de.dose_unit_source_value::TEXT
 FROM bronze.drug_exposure AS de
-join silver.person AS p
-on de.person_id = p.person_id
-left join silver.death as d
-  on de.person_id = d.person_id
-where de.drug_exposure_start_date >= p.birth_datetime::DATE
-and  coalesce(de.drug_exposure_end_date, de.drug_exposure_start_date) <= coalesce(d.death_date, current_date)
+JOIN silver.person AS p
+  ON de.person_id = p.person_id
+LEFT JOIN silver.death AS d
+  ON de.person_id = d.person_id
+WHERE
+  de.drug_exposure_start_date >= p.birth_datetime::DATE
+  AND coalesce(de.drug_exposure_end_date, de.drug_exposure_start_date) <= coalesce(d.death_date, CURRENT_DATE)

@@ -1,13 +1,20 @@
 AUDIT (
-    name event_not_in_future
+  name event_not_in_future
 );
-select * from @this_model
-where @column > current_date;
 
+SELECT
+  *
+FROM @this_model
+WHERE
+  @column > CURRENT_DATE;
 
 AUDIT (
-    name event_not_in_future_non_blocking,
-    blocking false
+  name event_not_in_future_non_blocking,
+  blocking FALSE
 );
-select * from @this_model
-where @column > current_date;
+
+SELECT
+  *
+FROM @this_model
+WHERE
+  @column > CURRENT_DATE

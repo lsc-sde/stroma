@@ -28,8 +28,12 @@ MODEL (
     gender_source_concept_id = 'Source concept ID for the provider gender'
   ),
   audits (
-    not_null(columns := (provider_id)),
-    unique_values(columns := (provider_id))
+    not_null(columns := (
+      provider_id
+    )),
+    unique_values(columns := (
+      provider_id
+    ))
   )
 );
 
