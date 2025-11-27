@@ -3,6 +3,10 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain drug_exposure_id,
+
+   audits (
+    not_null(columns := (drug_exposure_id), blocking := false)
+  ),
   references (
     person_id,
     drug_concept_id AS concept_id,

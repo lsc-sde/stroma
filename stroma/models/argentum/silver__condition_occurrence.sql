@@ -3,6 +3,9 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain condition_occurrence_id,
+    audits (
+    not_null(columns := (condition_occurrence_id), blocking := false)
+  ),
   references (
     person_id,
     condition_concept_id AS concept_id,

@@ -3,6 +3,10 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain location_id,
+ audits (
+    not_null(columns := (location_id), blocking := false)
+  ),
+
   references (
     country_concept_id AS concept_id
   ),

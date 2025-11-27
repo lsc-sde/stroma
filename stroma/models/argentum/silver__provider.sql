@@ -3,6 +3,11 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain provider_id,
+
+audits (
+    not_null(columns := (provider_id), blocking := false)
+  ),
+
   references (
     specialty_concept_id AS concept_id,
     care_site_id,
@@ -44,3 +49,14 @@ SELECT
   p.gender_source_value::TEXT,
   p.gender_source_concept_id::INT
 FROM bronze.provider AS p
+
+
+/*AUDIT (
+    name audit_provider_id_not_null
+   -- description 'Ensure provider_id is not null in silver.provider'
+    ); 
+        
+SELECT *
+        FROM silver.provider
+        WHERE provider_id IS NULL
+*/

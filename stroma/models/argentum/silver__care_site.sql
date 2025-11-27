@@ -3,6 +3,9 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain care_site_id,
+    audits (
+    not_null(columns := (care_site_id), blocking := false)
+  ),
   references (location_id, place_of_service_concept_id AS concept_id),
   description 'http://omop-erd.surge.sh/omop_cdm/tables/CARE_SITE.html',
   column_descriptions (

@@ -3,6 +3,10 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain note_nlp_id,
+
+  audits (
+    not_null(columns := (note_nlp_id), blocking := false)
+  ),
   references (
     section_concept_id AS concept_id,
     note_nlp_concept_id AS concept_id,
