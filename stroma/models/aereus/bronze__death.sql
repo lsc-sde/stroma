@@ -16,4 +16,6 @@ MODEL (
   )
 );
 
-@UNION('all', bronze_lth.death, bronze_uhmb.death)
+-- @UNION('all', bronze_lth.death, bronze_uhmb.death)
+
+select * from bronze_lth.death;
