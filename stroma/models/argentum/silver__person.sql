@@ -1,6 +1,6 @@
 MODEL (
   name silver.person,
-  kind VIEW,
+  kind FULL,
   cron '@monthly',
   grain person_id,
   references (
@@ -35,6 +35,12 @@ MODEL (
     race_source_concept_id = 'Source concept ID for the race of the person',
     ethnicity_source_value = 'Source value representing the ethnicity of the person',
     ethnicity_source_concept_id = 'Source concept ID for the ethnicity of the person'
+  ),
+  audits (
+    not_null(columns := (person_id)),
+    not_null_non_blocking(columns := (gender_concept_id, birth_datetime)),
+    unique_values(columns := (person_id)),
+    event_not_in_future(column := birth_datetime)
   )
 );
 

@@ -43,9 +43,23 @@ MODEL (
     value_source_value = 'Source value for the measurement value',
     meas_event_field_concept_id = 'Concept ID representing the field in the measurement event',
     measurement_event_id = 'Unique identifier for the measurement event'
+  ),
+  audits (
+    not_null(columns := (person_id, measurement_id, measurement_concept_id, measurement_date)),
+    unique_values(columns := (measurement_id)),
+    event_not_in_future(column := measurement_date)
   )
 );
-
+WITH deduplicated AS (
+  SELECT
+    m.*,
+    ROW_NUMBER() OVER (PARTITION BY m.measurement_id ORDER BY m.measurement_datetime DESC) AS rn
+  FROM bronze.measurement AS m
+  JOIN silver.person AS p ON m.person_id = p.person_id
+  LEFT JOIN silver.death AS d ON m.person_id = d.person_id
+  WHERE m.measurement_date >= p.birth_datetime::DATE
+    AND m.measurement_date <= COALESCE(d.death_date, CURRENT_DATE)
+)
 SELECT
   m.measurement_id::BIGINT,
   m.person_id::BIGINT,
@@ -70,5 +84,5 @@ SELECT
   m.value_source_value::TEXT,
   m.meas_event_field_concept_id::BIGINT,
   m.measurement_event_id::TEXT
-/* m.unique_key::TEXT, */ /* m.datasource::TEXT, */ /* m.updated_at::DATETIME */
-FROM bronze.measurement AS m /* WHERE */ /*   m.measurement_datetime BETWEEN @start_ds AND @end_ds */
+  FROM deduplicated AS m
+  WHERE m.rn = 1

@@ -36,6 +36,12 @@ MODEL (
     preceding_visit_detail_id = 'Identifier for the preceding visit detail',
     parent_visit_detail_id = 'Identifier for the parent visit detail',
     visit_occurrence_id = 'Identifier for the visit occurrence associated with the visit detail'
+  ),
+  audits (
+    not_null(columns := (person_id, visit_detail_id, visit_detail_concept_id, visit_detail_start_date)),
+    unique_values(columns := (visit_detail_id)),
+    event_not_in_future(column := visit_detail_start_date),
+    event_not_in_future(column := visit_detail_end_date)
   )
 );
 
@@ -59,3 +65,9 @@ SELECT
   vd.parent_visit_detail_id::BIGINT,
   vd.visit_occurrence_id::BIGINT
 FROM bronze.visit_detail AS vd
+  join silver.person AS p
+  on vd.person_id = p.person_id
+  left join silver.death as d
+  on vd.person_id = d.person_id
+where vd.visit_detail_start_date >= p.birth_datetime::DATE
+and  vd.visit_detail_end_date <= coalesce(d.death_date, current_date)
