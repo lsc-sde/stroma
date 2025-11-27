@@ -3,6 +3,10 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain payer_plan_period_id,
+  audits (
+    not_null(columns := (payer_plan_period_id)),
+    unique_values(columns := (payer_plan_period_id))
+  ),
   references (
     person_id,
     payer_concept_id AS concept_id,

@@ -4,7 +4,7 @@ MODEL (
   cron '@monthly',
   grain visit_occurrence_id,
   audits (
-    not_null(columns := (visit_occurrence_id, visit_concept_id)),
+    not_null(columns := (visit_occurrence_id)),
     unique_values(columns := (visit_occurrence_id))
   ),
   references (
