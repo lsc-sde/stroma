@@ -35,13 +35,16 @@ MODEL (
     discharged_to_source_value = 'Source value for the discharge destination',
     preceding_visit_occurrence_id = 'Identifier for the preceding visit occurrence'
   ),
-   audits (
+  audits (
     not_null(columns := (person_id, visit_occurrence_id, visit_concept_id)),
-    not_null_non_blocking(columns := (visit_start_date)),
-    unique_values(columns := (visit_occurrence_id)),
-    event_not_in_future_non_blocking(column := visit_start_date),
-    event_not_in_future_non_blocking(column := visit_end_date),
-
+    not_null_non_blocking(columns := (
+      visit_start_date
+    )),
+    unique_values(columns := (
+      visit_occurrence_id
+    )),
+    event_not_in_future_non_blocking("column" := visit_start_date),
+    event_not_in_future_non_blocking("column" := visit_end_date)
   )
 );
 
@@ -64,9 +67,10 @@ SELECT
   vo.discharged_to_source_value::TEXT,
   vo.preceding_visit_occurrence_id::BIGINT
 FROM bronze.visit_occurrence AS vo
-  join silver.person AS p
-  on vo.person_id = p.person_id
-  left join silver.death as d
-  on vo.person_id = d.person_id
-where vo.visit_start_date >= p.birth_datetime::DATE
-and  vo.visit_end_date <= coalesce(d.death_date, current_date)
+JOIN silver.person AS p
+  ON vo.person_id = p.person_id
+LEFT JOIN silver.death AS d
+  ON vo.person_id = d.person_id
+WHERE
+  vo.visit_start_date >= p.birth_datetime::DATE
+  AND vo.visit_end_date <= coalesce(d.death_date, CURRENT_DATE)

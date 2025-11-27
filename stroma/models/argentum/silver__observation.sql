@@ -43,8 +43,10 @@ MODEL (
   ),
   audits (
     not_null(columns := (person_id, observation_id, observation_concept_id, observation_date)),
-    unique_values(columns := (observation_id)),
-    event_not_in_future(column := observation_date)
+    unique_values(columns := (
+      observation_id
+    )),
+    event_not_in_future("column" := observation_date)
   )
 );
 
@@ -72,9 +74,10 @@ SELECT
   o.obs_event_field_concept_id::TEXT
 /* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
 FROM bronze.observation AS o
-  join silver.person AS p
-  on o.person_id = p.person_id
-  left join silver.death as d
-  on o.person_id = d.person_id
-where o.observation_date >= p.birth_datetime::DATE
-and  o.observation_date <= coalesce(d.death_date, current_date)
+JOIN silver.person AS p
+  ON o.person_id = p.person_id
+LEFT JOIN silver.death AS d
+  ON o.person_id = d.person_id
+WHERE
+  o.observation_date >= p.birth_datetime::DATE
+  AND o.observation_date <= coalesce(d.death_date, CURRENT_DATE)

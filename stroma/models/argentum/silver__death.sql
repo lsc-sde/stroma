@@ -22,8 +22,10 @@ MODEL (
   ),
   audits (
     not_null(columns := (person_id, death_date)),
-    unique_values(columns := (person_id)),
-    event_not_in_future(column := death_date)
+    unique_values(columns := (
+      person_id
+    )),
+    event_not_in_future("column" := death_date)
   )
 );
 
