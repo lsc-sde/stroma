@@ -3,6 +3,10 @@ MODEL (
   kind VIEW,
   cron '@monthly',
   grain visit_occurrence_id,
+  audits (
+    not_null(columns := (visit_occurrence_id, visit_concept_id)),
+    unique_values(columns := (visit_occurrence_id))
+  ),
   references (
     person_id,
     visit_concept_id AS concept_id,
