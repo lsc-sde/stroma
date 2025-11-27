@@ -32,6 +32,11 @@ MODEL (
     procedure_source_value = 'Source value representing the procedure',
     procedure_source_concept_id = 'Source concept ID for the procedure',
     modifier_source_value = 'Source value for any modifiers applied to the procedure'
+  ),
+  audits (
+    not_null(columns := (person_id, procedure_occurrence_id, procedure_concept_id, procedure_date)),
+    unique_values(columns := (procedure_occurrence_id)),
+    event_not_in_future(column := procedure_date)
   )
 );
 
@@ -53,3 +58,9 @@ SELECT
   po.procedure_source_concept_id::INT,
   po.modifier_source_value::TEXT
 FROM bronze.procedure_occurrence AS po
+  join silver.person AS p
+  on po.person_id = p.person_id
+  left join silver.death as d
+  on po.person_id = d.person_id
+where po.procedure_date >= p.birth_datetime::DATE
+and  po.procedure_date <= coalesce(d.death_date, current_date)

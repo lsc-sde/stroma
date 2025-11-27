@@ -21,6 +21,9 @@ MODEL (
     country_source_value = 'Source value for the country',
     latitude = 'Latitude coordinate of the location',
     longitude = 'Longitude coordinate of the location'
+  ),
+  audits (
+    not_null(columns := (location_id)),
   )
 );
 

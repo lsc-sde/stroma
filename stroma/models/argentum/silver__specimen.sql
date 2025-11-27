@@ -29,6 +29,9 @@ MODEL (
     unit_source_value = 'Source value for the unit of measurement',
     anatomic_site_source_value = 'Source value for the anatomical site of specimen collection',
     disease_status_source_value = 'Source value for the disease status of the specimen'
+  ),
+  audits (
+    not_null(columns := (person_id, specimen_id, specimen_concept_id, specimen_date)),
   )
 );
 

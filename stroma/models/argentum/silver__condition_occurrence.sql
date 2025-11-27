@@ -27,8 +27,12 @@ MODEL (
     condition_source_value = 'This field houses the verbatim value from the source data representing the condition that occurred. For example, this could be an ICD10 or Read code.',
     condition_source_concept_id = 'This is the concept representing the condition source value and may not necessarily be standard. This field is discouraged from use in analysis because it is not required to contain Standard Concepts that are used across the OHDSI community, and should only be used when Standard Concepts do not adequately represent the source detail for the Condition necessary for a given analytic use case. Consider using CONDITION_CONCEPT_ID instead to enable standardized analytics that can be consistent across the network.',
     condition_status_source_value = 'This field houses the verbatim value from the source data representing the condition status.'
+  ),
+  audits (
+    not_null(columns := (person_id, condition_occurrence_id, condition_concept_id, condition_start_date)),
+    unique_values(columns := (condition_occurrence_id)),
   )
-);
+  );
 
 SELECT
   co.condition_occurrence_id::INT,
@@ -48,5 +52,9 @@ SELECT
   co.condition_source_concept_id::INT,
   co.condition_status_source_value::TEXT
 FROM bronze.condition_occurrence AS co
-WHERE
-  co.condition_start_date >= '2015-01-01'
+join silver.person AS p
+on co.person_id = p.person_id
+left join silver.death as d
+  on co.person_id = d.person_id
+where co.condition_start_date >= p.birth_datetime::DATE
+and  coalesce(co.condition_end_date, co.condition_start_date) <= coalesce(d.death_date, current_date)

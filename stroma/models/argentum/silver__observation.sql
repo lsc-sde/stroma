@@ -40,6 +40,11 @@ MODEL (
     value_source_value = 'Source value for the observation value',
     observation_event_id = 'Identifier for the event associated with the observation',
     obs_event_field_concept_id = 'Concept ID for the field of the event associated with the observation'
+  ),
+  audits (
+    not_null(columns := (person_id, observation_id, observation_concept_id, observation_date)),
+    unique_values(columns := (observation_id)),
+    event_not_in_future(column := observation_date)
   )
 );
 
@@ -67,3 +72,9 @@ SELECT
   o.obs_event_field_concept_id::TEXT
 /* o.unique_key, */ /* o.datasource, */ /* o.updated_at */
 FROM bronze.observation AS o
+  join silver.person AS p
+  on o.person_id = p.person_id
+  left join silver.death as d
+  on o.person_id = d.person_id
+where o.observation_date >= p.birth_datetime::DATE
+and  o.observation_date <= coalesce(d.death_date, current_date)

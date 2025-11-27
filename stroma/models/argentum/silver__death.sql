@@ -19,6 +19,11 @@ MODEL (
     cause_concept_id = 'Concept identifier for the cause of death.',
     cause_source_value = 'Source value for the cause of death.',
     cause_source_concept_id = 'Concept identifier for the source of the cause of death.'
+  ),
+  audits (
+    not_null(columns := (person_id, death_date)),
+    unique_values(columns := (person_id)),
+    event_not_in_future(column := death_date)
   )
 );
 
