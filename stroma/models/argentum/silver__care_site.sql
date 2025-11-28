@@ -13,7 +13,9 @@ MODEL (
     care_site_source_value = 'The identifier for the Care Site in the source data, stored here for reference.',
     place_of_service_source_value = 'The source code for the Place of Service as it appears in the source data, stored here for reference.'
   ),
-  audits (not_null(columns := (care_site_id, care_site_name)))
+  audits (
+    not_null(columns := (care_site_id, care_site_name))
+  )
 );
 
 SELECT
