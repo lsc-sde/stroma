@@ -12,7 +12,7 @@ authors = [{ name = "vvcb" }]
 dependencies = [
     "python-dotenv",
     "sqlmesh[github,azuresql,databricks,lsp]~=0.227",
-    "numpy<2.0",
+    "databricks-sql-connector[pyarrow]>=3.0.2",
 ]
 dynamic = ["version"]
 

@@ -39,6 +39,16 @@ MODEL (
     drug_source_concept_id = 'A foreign key to a Drug Concept that refers to the code used in the source.',
     route_source_value = 'The source code for the route of Drug administration as it appears in the source data.',
     dose_unit_source_value = 'The source code for the unit of measure for the dose as it appears in the source data.'
+  ),
+  audits (
+    not_null(
+      columns := (person_id, drug_exposure_id, drug_concept_id, drug_exposure_start_date)
+    ),
+    unique_values(columns := (
+      drug_exposure_id
+    )),
+    event_not_in_future("column" := drug_exposure_start_date),
+    event_not_in_future("column" := drug_exposure_end_date)
   )
 );
 
@@ -67,3 +77,10 @@ SELECT
   de.route_source_value::TEXT,
   de.dose_unit_source_value::TEXT
 FROM bronze.drug_exposure AS de
+JOIN silver.person AS p
+  ON de.person_id = p.person_id
+LEFT JOIN silver.death AS d
+  ON de.person_id = d.person_id
+WHERE
+  de.drug_exposure_start_date >= p.birth_datetime::DATE
+  AND coalesce(de.drug_exposure_end_date, de.drug_exposure_start_date) <= coalesce(d.death_date, CURRENT_DATE)
