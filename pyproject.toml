@@ -11,8 +11,8 @@ license = { file = "LICENSE" }
 authors = [{ name = "vvcb" }]
 dependencies = [
     "python-dotenv",
-    "sqlmesh[github,azuresql,databricks,lsp]~=0.227",
-    "databricks-sql-connector[pyarrow]>=3.0.2",
+    "sqlmesh[github,azuresql,databricks,lsp]~=0.236",
+    "databricks-sql-connector[pyarrow]>=4.5.0",
 ]
 dynamic = ["version"]
 

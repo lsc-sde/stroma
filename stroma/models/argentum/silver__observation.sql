@@ -43,7 +43,7 @@ MODEL (
   ),
   audits (
     not_null(columns := (person_id, observation_id, observation_concept_id, observation_date)),
-    unique_values(columns := (
+    unique_values_non_blocking(columns := (
       observation_id
     )),
     event_not_in_future("column" := observation_date)
