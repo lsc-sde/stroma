@@ -61,7 +61,9 @@ gateways = {}
 # For each gateway, first check if it is enabled.
 # This avoids reading in env variables that may not exist or looking for libraries that are not installed
 
-enabled_gateways = [i.strip().lower() for i in os.getenv("ENABLED_GATEWAYS").split(",")]
+enabled_gateways = [
+    i.strip().lower() for i in os.environ["ENABLED_GATEWAYS"].split(",")
+]
 
 # Make sure default gateway is in enabled
 assert default_gateway in enabled_gateways, AssertionError(
@@ -95,12 +97,14 @@ if EnumGateway.DATABRICKS in enabled_gateways:
                 server_hostname=os.environ["DATABRICKS_SERVER_HOSTNAME"],
                 http_path=os.environ["DATABRICKS_HTTP_PATH"],
                 catalog=os.environ["DATABRICKS_CATALOG"],
-                concurrent_tasks=os.getenv("DATABRICKS_CONCURRENT_TASKS", default=4),
+                concurrent_tasks=int(
+                    os.getenv("DATABRICKS_CONCURRENT_TASKS", default=4)
+                ),
                 access_token=os.environ["DATABRICKS_ACCESS_TOKEN"],
             ),
             state_connection=AzureSQLConnectionConfig(
                 host=os.environ["DATABRICKS_STATE_DB_HOST"],
-                port=os.environ["DATABRICKS_STATE_DB_PORT"],
+                port=int(os.environ["DATABRICKS_STATE_DB_PORT"]),
                 user=os.environ["DATABRICKS_STATE_DB_USER"],
                 password=os.environ["DATABRICKS_STATE_DB_PASSWORD"],
                 database=os.environ["DATABRICKS_STATE_DB_DATABASE"],
@@ -123,7 +127,7 @@ if EnumGateway.MSSQL in enabled_gateways:
             connection=MSSQLConnectionConfig(
                 host=os.environ["MSSQL_HOST"],
                 database=os.environ["MSSQL_DATABASE"],
-                concurrent_tasks=os.getenv("MSSQL_CONCURRENT_TASKS", default=4),
+                concurrent_tasks=int(os.getenv("MSSQL_CONCURRENT_TASKS", default=4)),
             ),
             state_connection=MSSQLConnectionConfig(
                 host=os.environ["MSSQL_STATE_DB_HOST"],
@@ -156,7 +160,7 @@ class SQLMeshSettings(BaseModel):
 
     project: str
     model_defaults: ModelDefaultsConfig = ModelDefaultsConfig(
-        kind=ModelKindName.VIEW,
+        kind=ModelKindName.VIEW,  # type: ignore
         dialect="duckdb",
         cron="@daily",
         owner="LTH DST",
@@ -202,11 +206,13 @@ class OMOPSettings(BaseModel):
     @property
     def catalog_src(self) -> str:
         if default_gateway == EnumGateway.DATABRICKS:
-            return os.getenv("DATABRICKS_CATALOG_SOURCE")
+            return os.environ["DATABRICKS_CATALOG_SOURCE"]
         elif default_gateway == EnumGateway.MSSQL:
-            return os.getenv("MSSQL_DATABASE_SOURCE")
+            return os.environ["MSSQL_DATABASE_SOURCE"]
         elif default_gateway == EnumGateway.DUCKDB:
-            return Path(os.getenv("DUCKDB_DATABASE")).stem
+            return Path(os.environ["DUCKDB_DATABASE"]).stem
+        else:
+            raise ValueError(f"Unsupported default gateway: {default_gateway}")
 
 
 variables = OMOPSettings().model_dump(mode="json")
